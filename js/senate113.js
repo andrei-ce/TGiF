@@ -1,4 +1,4 @@
-var senate113 = {
+var data = {
    "status":"OK",
    "copyright":" Copyright (c) 2020 Pro Publica Inc. All Rights Reserved.",
    "results":[
@@ -5053,4 +5053,27 @@ var senate113 = {
              ]
       }
    ]
-}
+};
+
+
+//Select where to insert all data - in this case tbody
+  // -- LOOP HERE -- {
+  //Create TR
+    // -- LOOP HERE -- {
+      //Select what data to insert
+      //Create TD
+      //Insert data in TD
+      //Append TD to TR
+  //}
+  //Append TR to Table
+//}  
+
+// var tBody = document.getElementById("senate-data");
+
+// var newTr = document.createElement("tr");
+// newTr.innerHTML = senate113.results[4][0].id;
+// tBody.appendChild(newTr);
+
+// console.log(tBody);
+
+// test.innerHTML()
