@@ -21,33 +21,38 @@
 <body>
   <header>
     <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
-      <a class="navbar-brand" href="./index.html"><img id="logo" src="./imgs/TGIF_logo.png" alt="TGiF logo"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"><i class="fas fa-flag-usa"></i></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="./index.html"><i class="fas fa-home"></i> HOME </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false"><i class="fas fa-landmark"></i> CONGRESS 113</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="./senate.html"> SENATE</a>
-              <a class="dropdown-item" href="./house.html"> HOUSE</a>
-            </div>
-          </li>
-          <li class="nav-item ml-auto">
-            <a class="nav-link border" href="mailto:info@tgif.net"></i><i class="fas fa-envelope"></i> EMAIL </a>
-          </li>
+      <div class="container">
+        <a class="navbar-brand" href="./index.html"><img id="logo" src="./imgs/TGIF_logo.png" alt="TGiF logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html"><i class="fas fa-home"></i> HOME </a>
+            </li>
+            <li class="nav-item active dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false"><i class="fas fa-landmark"></i> CONGRESS 113</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="./senate.html"> SENATE</a>
+                <a class="dropdown-item" href="./house.html"> HOUSE</a>
+              </div>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item border border-warning" id="email">
+              <a class="nav-link" href="mailto:info@tgif.net"><i class="fas fa-envelope"></i> info@tgif.net</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
   </header>
   <!--Table container-->
-  <div class="container py-30">
-    <div class="block-text py-30">
+  <div class="container main-content py-3 mb-4">
+    <div class="block-text py-3">
       <h2>Congressmen</h2>
       <p>The major power of the House is to pass federal legislation that affects the entire country, although its bills
         must also be passed by the Senate and further agreed to by the U.S. President before becoming law (unless both
@@ -60,90 +65,36 @@
         every
         state is entitled to at least one representative.</p>
     </div>
-    <table>
-      <thead>
+    <table class="table table-bordered table-hover table-dark table-responsive-sm">
+      <thead class="thead-light">
         <tr>
-          <th>Members</th>
-          <th>First name</th>
-          <th>Middle name</th>
-          <th>Last name</th>
-          <th>Party</th>
-          <th>Total votes</th>
+          <th scope="col">Name</th>
+          <th scope="col">Party</th>
+          <th scope="col">State</th>
+          <th scope="col">Years in Office</th>
+          <th scope="col">% Votes w/ Party</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Robert</td>
-          <td>B.</td>
-          <td>Aderholt</td>
-          <td>R</td>
-          <td>1192</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Justin</td>
-          <td>null</td>
-          <td>Amash</td>
-          <td>R</td>
-          <td>1192</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Mark</td>
-          <td>null</td>
-          <td>Amodei</td>
-          <td>R</td>
-          <td>1192</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>Alma</td>
-          <td></td>
-          <td>Adams</td>
-          <td>D</td>
-          <td>48</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>Spencer</td>
-          <td>null</td>
-          <td>Bachus</td>
-          <td>R</td>
-          <td>1192</td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>Joe</td>
-          <td>L.</td>
-          <td>Barton</td>
-          <td>R</td>
-          <td>1192</td>
-        </tr>
-        <tr>
-          <td>7</td>
-          <td>Xavier</td>
-          <td>null</td>
-          <td>Becerra</td>
-          <td>D</td>
-          <td>1192</td>
-        </tr>
+      <tbody id="house-data">
       </tbody>
     </table>
   </div>
   <footer>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-      crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-      crossorigin="anonymous"></script>
+    <p>&reg; All rights reserved to Transparent Government in Fact</p>
   </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <script src="./js/house113.js"></script>
+  <script src="./js/main2.js"></script>
 </body>
 
 </html>
