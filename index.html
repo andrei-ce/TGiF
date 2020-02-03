@@ -20,7 +20,7 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <div class="container">
         <a class="navbar-brand" href="./index.html"><img id="logo" src="./imgs/TGIF_logo.png" alt="TGiF logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -40,10 +40,27 @@
                 <a class="dropdown-item" href="./house.html"> HOUSE</a>
               </div>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false"><i class="fas fa-tasks"></i> Attendance</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="./senate_att.html"> SENATE</a>
+                <a class="dropdown-item" href="#"> HOUSE</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false"><i class="far fa-star"></i> Loyalty</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="./senate_loyalty.html"> SENATE</a>
+                <a class="dropdown-item" href="#"> HOUSE</a>
+              </div>
+            </li>
           </ul>
           <ul class="navbar-nav">
             <li class="nav-item border border-warning" id="email">
-              <a class="nav-link" href="mailto:info@tgif.net"><i class="fas fa-envelope"></i> info@tgif.net</a>
+              <a class="nav-link" href="mailto:info@tgif.net"><i class="fas fa-envelope"></i>
+                info@tgif.net</a>
             </li>
           </ul>
         </div>
@@ -71,44 +88,73 @@
     </div>
     <div class="block-text py-3">
       <h3>Background History of Government Transparency</h3>
-      <p>In the West, the idea that government should be open to public scrutiny and susceptible to public opinion dates
-        back at least to the time of the Enlightenment, when many philosophes made an attack on absolutist doctrine of
-        state secrecy, a core part of their intellectual project. The passage of formal legislative instruments to this
-        end can also be traced to this time with Sweden, for example, (which then included Finland as a Swedish-governed
-        territory) enacting free press legislation as part of its constitution (Freedom of the Press Act, 1766). This
-        approach, and that of the philosophes more broadly, is strongly related to recent historiography on the
-        eighteenth-century public sphere.</p>
+      <span id="dots">...</span><span id="more">
+        <p>In the West, the idea that government should be open to public
+          scrutiny and susceptible to public opinion dates
+          back at least to the time of the Enlightenment, when many philosophes made an attack on absolutist doctrine of
+          state secrecy, a core part of their intellectual project. The passage of formal legislative instruments to
+          this
+          end can also be traced to this time with Sweden, for example, (which then included Finland as a
+          Swedish-governed
+          territory) enacting free press legislation as part of its constitution (Freedom of the Press Act, 1766). This
+          approach, and that of the philosophes more broadly, is strongly related to recent historiography on the
+          eighteenth-century public sphere.</p>
 
-      <p>Influenced by Enlightenment thought, the revolutions in America (1776) and France (1789), freedom of the press
-        enshrined provisions and requirements for public budgetary accounting and freedom of the press in constitutional
-        articles. In the nineteenth century, attempts by Metternichean statesmen to row back on these measures were
-        vigorously opposed by a number of eminent liberal politicians and writers, Bentham, Mill and Acton prominent
-        among the latter.</p>
+        <p>Influenced by Enlightenment thought, the revolutions in America (1776) and France (1789), freedom of the
+          press
+          enshrined provisions and requirements for public budgetary accounting and freedom of the press in
+          constitutional
+          articles. In the nineteenth century, attempts by Metternichean statesmen to row back on these measures were
+          vigorously opposed by a number of eminent liberal politicians and writers, Bentham, Mill and Acton prominent
+          among the latter.</p>
 
-      <p>Open government is widely seen to be a key hallmark of contemporary democratic practice and is often linked to
-        the passing of freedom of information legislation. Scandinavian countries claim to have adopted the first
-        freedom of information legislation, dating the origins of its modern provisions to the eighteenth century and
-        Finland continuing the presumption of openness after gaining independence in 1917, passing its Act on Publicity
-        of Official Documents in 1951 (superseded by new legislation in 1999).</p>
+        <p>Open government is widely seen to be a key hallmark of contemporary democratic practice and is often linked
+          to
+          the passing of freedom of information legislation. Scandinavian countries claim to have adopted the first
+          freedom of information legislation, dating the origins of its modern provisions to the eighteenth century and
+          Finland continuing the presumption of openness after gaining independence in 1917, passing its Act on
+          Publicity
+          of Official Documents in 1951 (superseded by new legislation in 1999).</p>
 
-      <p>The United States passed its Freedom of Information Act (FOIA) in 1966, FOIAs, Access to Information Acts
-        (AIAs) or equivalent laws were passed in Denmark and Norway in 1970.</p>
+        <p>The United States passed its Freedom of Information Act (FOIA) in 1966, FOIAs, Access to Information Acts
+          (AIAs) or equivalent laws were passed in Denmark and Norway in 1970.</p>
+      </span>
     </div>
+    <button onclick="readMoreLess()" class="btn btn-outline-primary btn-sm" id="moreBtn">
+      Read More
+    </button>
   </div>
   <footer>
     <p>&reg; All rights reserved to Transparent Government in Fact</p>
   </footer>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+  <script src=" https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
     integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
+  <script>
+    function readMoreLess() {
+      var dots = document.getElementById("dots");
+      var moreText = document.getElementById("more");
+      var btnText = document.getElementById("moreBtn");
+
+      if (dots.style.display === "none") {
+        dots.style.display = "inline";
+        btnText.innerHTML = "Read more";
+        moreText.style.display = "none";
+      } else {
+        dots.style.display = "none";
+        btnText.innerHTML = "Read less";
+        moreText.style.display = "inline";
+      }
+    }
+  </script>
 </body>
 
 </html>

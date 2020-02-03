@@ -1,8 +1,8 @@
-let data = {
+let dataSenate113 = {
    "status":"OK",
    "copyright":" Copyright (c) 2020 Pro Publica Inc. All Rights Reserved.",
    "results":[
-      {
+      { 
          "congress": "113",
          "chamber": "Senate",
          

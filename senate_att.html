@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <!-- Font Awesome CSS -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
     integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />
@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css?family=Fauna+One&display=swap" rel="stylesheet" />
   <!-- Custom CSS -->
   <link rel="stylesheet" href="./styles/tgif.css" />
-  <title>TGiF: House</title>
+  <title>TGiF: Attendance</title>
 </head>
 
 <body>
@@ -32,7 +32,7 @@
             <li class="nav-item">
               <a class="nav-link" href="./index.html"><i class="fas fa-home"></i> HOME </a>
             </li>
-            <li class="nav-item active dropdown">
+            <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false"><i class="fas fa-landmark"></i> CONGRESS 113</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -40,7 +40,7 @@
                 <a class="dropdown-item" href="./house.html"> HOUSE</a>
               </div>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item active dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false"><i class="fas fa-tasks"></i> Attendance</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -67,51 +67,101 @@
       </div>
     </nav>
   </header>
-  <!--Table container-->
+
   <div class="container main-content py-3 mb-4">
-    <div class="block-text py-3">
-      <h2>Congressmen</h2>
-      <p>The major power of the House is to pass federal legislation that affects the entire country, although its bills
-        must also be passed by the Senate and further agreed to by the U.S. President before becoming law (unless both
-        the
-        House and Senate re-pass the legislation with a two-thirds majority in each chamber). The House has some
-        exclusive
-        powers: the power to initiate revenue bills, to impeach officials (impeached officials are subsequently tried in
-        the Senate), and to elect the U.S. President in case there is no majority in the Electoral College.</p>
-      <p>Each U.S. state is represented in the House in proportion to its population as measured in the census, but
-        every
-        state is entitled to at least one representative.</p>
+    <div class="row">
+      <div class="block-text py-2 col-12 col-md-6">
+        <h2>Attendance</h2>
+        <p>The Constitution specifies that a majority of members constitutes a quorum to do business in each house.
+          Representatives and senators rarely force the presence of a quorum by demanding quorum calls; thus, in most
+          cases,
+          debates continue even if a majority is not present.</p>
+
+        <p>The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator stating "aye"
+          or
+          "no" when his or her name is announced. The House reserves roll-call votes for the most formal matters, as a
+          roll-call of all 435 representatives takes quite some time; normally, members vote by electronic device. In
+          the
+          case of a tie, the motion in question fails. In the Senate, the Vice President may (if present) cast the
+          tiebreaking vote.</p>
+      </div>
+      <div class="block-text py-2 col-12 col-md-6">
+        <h4 class="text-right">Senate at a glance</h4>
+        <table class="table table-bordered table-hover table-dark table-responsive-sm">
+          <thead>
+            <tr>
+              <th>Party</th>
+              <th>Number of Reps</th>
+              <th>% Voted with Party</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="rep-at-glance">
+              <td>Republican</td>
+            </tr>
+            <tr id="dem-at-glance">
+              <td>Democrat</td>
+            </tr>
+            <tr id="ind-at-glance">
+              <td>Independent</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <table class="table table-bordered table-hover table-dark table-responsive-sm">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Party</th>
-          <th scope="col">State</th>
-          <th scope="col">Years in Office</th>
-          <th scope="col">% Votes w/ Party</th>
-        </tr>
-      </thead>
-      <tbody id="house-data">
-      </tbody>
-    </table>
+
+
+    <div class="row">
+      <div class="block-text py-2 col-12 col-md-6">
+        <h4>Least Engaged (Bottom 10% Attendance)</h4>
+        <table class="table table-bordered table-hover table-dark table-responsive-sm">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Number of Missed Votes</th>
+              <th>% Missed</th>
+            </tr>
+          </thead>
+          <tbody id="senate-least-engaged">
+          </tbody>
+        </table>
+      </div>
+      <div class="block-text py-2 col-12 col-md-6">
+        <h4>Most Engaged (Top 10% Attendance)</h4>
+        <table class="table table-bordered table-hover table-dark table-responsive-sm">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Number of Missed Votes</th>
+              <th>% Missed</th>
+            </tr>
+          </thead>
+          <tbody id="senate-most-engaged">
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
+
   <footer>
     <p>&reg; All rights reserved to Transparent Government in Fact</p>
   </footer>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
     crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
     crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
+
+  <script src="./js/senate113.js"></script>
   <script src="./js/house113.js"></script>
-  <script src="./js/main2.js"></script>
+  <script src="./js/main3.js"></script>
+
 </body>
 
 </html>
