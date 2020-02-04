@@ -36,16 +36,56 @@ body {
 }
 
 #navbarSupportedContent > ul.navbar-nav > li.nav-item > a:hover{
-  color: rgb(31,141,225);
+  color: rgb(210, 167, 26);
 }
-/* ************* MAIN CONTENT ************* */
+#navbarSupportedContent > ul.navbar-nav > li.nav-item > a:active{
+  color: rgb(210, 167, 26);
+}
 
+/* ************* drop down items ************* */
+#navbarSupportedContent > ul.navbar-nav > li.nav-item > div.dropdown-menu > a.dropdown-item:hover{
+  background-color: rgb(249, 230, 171);
+}
+#navbarSupportedContent > ul.navbar-nav > li.nav-item > div.dropdown-menu > a.dropdown-item:active{
+  background-color: rgb(210, 167, 26);
+}
+
+/* ************* MAIN CONTENT ************* */
 .container.main-content {
   background-color: rgba(0, 0, 0, 0.858);
 }
 
-#more {
+#more-text {
   display: none;
+}
+
+#more-btn {
+  color: white;
+  text-decoration: underline;
+}
+
+#more-btn:hover {
+  color: rgb(210, 167, 26);
+  text-decoration: underline;
+}
+
+/* ************* TABLE ************* */
+tbody a {
+  color: white;
+}
+
+tbody a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+tr td:nth-child(2), tr td:nth-child(3), tr td:nth-child(4), tr td:nth-child(5) {
+  text-align: center;
+}
+
+div>table>thead>tr>th:nth-child(2), div>table>thead>tr>th:nth-child(3), 
+div>table>thead>tr>th:nth-child(4), div>table>thead>tr>th:nth-child(5) {
+  text-align: center;
 }
 
 /* ************* FOOTER ************* */

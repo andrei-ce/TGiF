@@ -15,7 +15,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Fauna+One&display=swap" rel="stylesheet" />
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="./styles/tgif.css" />
-	<title>TGiF: Attendance</title>
+	<title>TGiF: Loyalty</title>
 </head>
 
 <body>
@@ -45,7 +45,7 @@
 								aria-haspopup="true" aria-expanded="false"><i class="fas fa-tasks"></i> Attendance</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="./senate_att.html"> SENATE</a>
-								<a class="dropdown-item" href="#"> HOUSE</a>
+								<a class="dropdown-item" href="./house_att.html"> HOUSE</a>
 							</div>
 						</li>
 						<li class="nav-item active dropdown">
@@ -53,7 +53,7 @@
 								aria-haspopup="true" aria-expanded="false"><i class="far fa-star"></i> Loyalty</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="./senate_loyalty.html"> SENATE</a>
-								<a class="dropdown-item" href="#"> HOUSE</a>
+								<a class="dropdown-item" href="./house_loyalty.html"> HOUSE</a>
 							</div>
 						</li>
 					</ul>
@@ -79,7 +79,7 @@
 			<div class="block-text py-2 col-12 col-md-6">
 				<h4 class="text-right">Senate at a glance</h4>
 				<table class="table table-bordered table-hover table-dark table-responsive-sm">
-					<thead>
+					<thead class="thead-light">
 						<tr>
 							<th>Party</th>
 							<th>Number of Reps</th>
@@ -96,6 +96,9 @@
 						<tr id="ind-at-glance">
 							<td>Independent</td>
 						</tr>
+						<tr id="total-at-glance">
+							<td>Total</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -106,46 +109,7 @@
 			<div class="block-text py-2 col-12 col-md-6">
 				<h4>Least Loyal (Bottom 10% of Party)</h4>
 				<table class="table table-bordered table-hover table-dark table-responsive-sm">
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Number of Missed Votes</th>
-							<th>% Party Votes</th>
-						</tr>
-					</thead>
-					<tbody">
-						<tr>
-							<td>--</td>
-							<td>--</td>
-							<td>--</td>
-						</tr>
-						<tr>
-							<td>--</td>
-							<td>--</td>
-							<td>--</td>
-						</tr>
-						<tr>
-							<td>--</td>
-							<td>--</td>
-							<td>--</td>
-						</tr>
-						<tr>
-							<td>--</td>
-							<td>--</td>
-							<td>--</td>
-						</tr>
-						<tr>
-							<td>--</td>
-							<td>--</td>
-							<td>--</td>
-						</tr>
-						</tbody>
-				</table>
-			</div>
-			<div class="block-text py-2 col-12 col-md-6">
-				<h4>Most Loyal (Top 10% of Party)</h4>
-				<table class="table table-bordered table-hover table-dark table-responsive-sm">
-					<thead>
+					<thead class="thead-light">
 						<tr>
 							<th>Name</th>
 							<th>Number of Missed Votes</th>
@@ -153,31 +117,20 @@
 						</tr>
 					</thead>
 					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<div class="block-text py-2 col-12 col-md-6">
+				<h4>Most Loyal (Top 10% of Party)</h4>
+				<table class="table table-bordered table-hover table-dark table-responsive-sm">
+					<thead class="thead-light">
 						<tr>
-							<td>--</td>
-							<td>--</td>
-							<td>--</td>
+							<th>Name</th>
+							<th>Number of Missed Votes</th>
+							<th>% Party Votes</th>
 						</tr>
-						<tr>
-							<td>--</td>
-							<td>--</td>
-							<td>--</td>
-						</tr>
-						<tr>
-							<td>--</td>
-							<td>--</td>
-							<td>--</td>
-						</tr>
-						<tr>
-							<td>--</td>
-							<td>--</td>
-							<td>--</td>
-						</tr>
-						<tr>
-							<td>--</td>
-							<td>--</td>
-							<td>--</td>
-						</tr>
+					</thead>
+					<tbody>
 					</tbody>
 				</table>
 			</div>
@@ -201,7 +154,7 @@
 
 	<script src="./js/senate113.js"></script>
 	<script src="./js/house113.js"></script>
-	<script src="./js/main3.js"></script>
+	<!-- <script src="./js/main3.js"></script> -->
 
 </body>
 

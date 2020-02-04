@@ -70,17 +70,18 @@ newTd.className = "text-center"
 newTd.innerHTML = stats.independentAvgVotesWithParty;
 indAtGlance.appendChild(newTd);
 
-// let indAtGlance = document.getElementById("ind-at-glance");
-// var newTd = document.createElement("td");
-// newTd.className = "text-center"
-// newTd.innerHTML = stats.independentTotal;
-// indAtGlance.appendChild(newTd);
-// var newTd = document.createElement("td");
-// newTd.className = "text-center"
-// newTd.innerHTML = stats.independentAvgVotesWithParty;
-// indAtGlance.appendChild(newTd);
-//****** CALCULATE NUMBER 10% LEAST ENGAGED*/
+let totalAtGlance = document.getElementById("total-at-glance");
+var newTd = document.createElement("td");
+newTd.className = "text-center"
+newTd.innerHTML = mySenateMembers.length;
+totalAtGlance.appendChild(newTd);
+var newTd = document.createElement("td");
+newTd.className = "text-center"
+newTd.innerHTML = (((stats.republicanTotal * stats.republicanAvgVotesWithParty)+(stats.democratTotal * stats.democratAvgVotesWithParty)+(stats.independentTotal * stats.independentAvgVotesWithParty))/ 
+mySenateMembers.length).toFixed(2);
+totalAtGlance.appendChild(newTd);
 
+//****** 10% LEAST & MOST ENGAGED*/
 // create sorted list by missed votes in percentage
 let mySenateMembersSorted = mySenateMembers.sort((a,b) => {
   return b.missed_votes_pct - a.missed_votes_pct;
@@ -88,39 +89,57 @@ let mySenateMembersSorted = mySenateMembers.sort((a,b) => {
 
 // create least and most engaged lists
 let leastEngaged = [];
+let missedVotesLeastEngaged = [];
 for (let i = 0; i < mySenateMembers.length; i++) {
 // add members until it reaches (current sum of missed_votes_pct)/(total missed votes) <= 10%
-  if (leastEngaged.length < (mySenateMembers.length * 0.1)) {
+  if (leastEngaged.length < Math.round(mySenateMembers.length * 0.1)
+      || missedVotesLeastEngaged.includes(mySenateMembersSorted[i].missed_votes_pct)) {
     leastEngaged.push(mySenateMembersSorted[i]);
+    missedVotesLeastEngaged.push(mySenateMembersSorted[i].missed_votes_pct);
   }
 }
 
 let mostEngaged  = [];
+let missedVotesMostEngaged = [];
 for (let i = mySenateMembers.length - 1; i >= 0; i--) {
-// add members until it reaches (current sum of missed_votes_pct)/(total missed votes) <= 10%
-  if (mostEngaged.length < (mySenateMembers.length * 0.1)) {
+// add members until it reaches (current sum of missed_votes_pct)/(total missed votes) >= 10%
+  if (mostEngaged.length < Math.round(mySenateMembers.length * 0.1)
+      || missedVotesMostEngaged.includes(mySenateMembersSorted[i].missed_votes_pct)) {
     mostEngaged.push(mySenateMembersSorted[i]);
+    missedVotesMostEngaged.push(mySenateMembersSorted[i].missed_votes_pct);
   }
 }
 
 // create HTML table and show these members
-
 let fieldsInserted = ["first_name", "missed_votes", "missed_votes_pct"];
 
+// append variables to HTML elements & ultimately to table
 let tBody2 = document.getElementById("senate-least-engaged");
 for (let i=0; i< leastEngaged.length; i++) {
   let newTr = document.createElement("tr");
-    for  (let j=0; j< fieldsInserted.length; j++) {
+    for (let j=0; j< fieldsInserted.length; j++) {
       let dataInserted = fieldsInserted[j];
       let newTd = document.createElement("td");
-      newTd.innerHTML = leastEngaged[i][dataInserted]
-      if (j==0 && leastEngaged[i].middle_name != null) {
-        newTd.innerHTML = `${newTd.innerHTML} ${leastEngaged[i].middle_name} ${leastEngaged[i].last_name}`;
-      } else if (j==0) {
-        newTd.innerHTML = `${newTd.innerHTML} ${leastEngaged[i].last_name}`;
+// if in position j=0 (name), <a href="member.url">name</a> (insert name as innetHTML of atag)
+      if (j==0) {
+        let newAnchorTag = document.createElement("a");
+        newAnchorTag.setAttribute("href",leastEngaged[i].url);
+        newAnchorTag.innerHTML = leastEngaged[i][dataInserted];
+        if (j==0 && leastEngaged[i].middle_name != null) {
+          newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${leastEngaged[i].middle_name} ${leastEngaged[i].last_name}`;
+        } else {
+          newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${leastEngaged[i].last_name}`;
+        }
+// <td><a href="member.url">name</a></td>
+        newTd.appendChild(newAnchorTag);
+      }
+// <td>name</td>
+      else {
+        newTd.innerHTML = leastEngaged[i][dataInserted];
       }
       newTr.appendChild(newTd);
     }
+// <tr><td><a href="member.url">name</a></td></tr>
   tBody2.appendChild(newTr);
 }
 
@@ -130,13 +149,29 @@ for (let i=0; i< mostEngaged.length; i++) {
     for  (let j=0; j< fieldsInserted.length; j++) {
       let dataInserted = fieldsInserted[j];
       let newTd = document.createElement("td");
-      newTd.innerHTML = mostEngaged[i][dataInserted]
-      if (j==0 && mostEngaged[i].middle_name != null) {
-        newTd.innerHTML = `${newTd.innerHTML} ${mostEngaged[i].middle_name} ${mostEngaged[i].last_name}`;
-      } else if (j==0) {
-        newTd.innerHTML = `${newTd.innerHTML} ${mostEngaged[i].last_name}`;
+      if (j==0) {
+        let newAnchorTag = document.createElement("a");
+        newAnchorTag.setAttribute("href",mostEngaged[i].url);
+        newAnchorTag.innerHTML = mostEngaged[i][dataInserted];
+        if (j==0 && mostEngaged[i].middle_name != null) {
+          newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${mostEngaged[i].middle_name} ${mostEngaged[i].last_name}`;
+        } else {
+          newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${mostEngaged[i].last_name}`;
+        }
+        newTd.appendChild(newAnchorTag);
+      }
+      else {
+        newTd.innerHTML = mostEngaged[i][dataInserted];
       }
       newTr.appendChild(newTd);
     }
   tBody3.appendChild(newTr);
 }
+
+//****** 10% LEAST & MOST VOTES WITH PARTY*/
+
+//create sorted list by votes_with_party in percentage
+// let mySenateMembersSorted2 = mySenateMembers.sort((a,b) => {
+//   return b.votes_with_party_pct - a.votes_with_party_pct;
+// });
+

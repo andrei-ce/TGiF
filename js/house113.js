@@ -17296,7 +17296,7 @@ let dataHouse113 = {
                 "short_title": "Del.",
                 "api_uri":"https://api.propublica.org/congress/v1/members/S001177.json",
                 "first_name": "Gregorio",
-                "middle_name": "Kilili Camacho",
+                "middle_name": "K. C.",
                 "last_name": "Sablan",
                 "suffix": null,
                 "date_of_birth": "1955-01-19",

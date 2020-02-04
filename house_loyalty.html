@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css?family=Fauna+One&display=swap" rel="stylesheet" />
   <!-- Custom CSS -->
   <link rel="stylesheet" href="./styles/tgif.css" />
-  <title>TGiF: Attendance</title>
+  <title>TGiF: Loyalty</title>
 </head>
 
 <body>
@@ -40,7 +40,7 @@
                 <a class="dropdown-item" href="./house.html"> HOUSE</a>
               </div>
             </li>
-            <li class="nav-item active dropdown">
+            <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false"><i class="fas fa-tasks"></i> Attendance</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -48,7 +48,7 @@
                 <a class="dropdown-item" href="./house_att.html"> HOUSE</a>
               </div>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item active dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false"><i class="far fa-star"></i> Loyalty</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -71,27 +71,18 @@
   <div class="container main-content py-3 mb-4">
     <div class="row">
       <div class="block-text py-2 col-12 col-md-6">
-        <h2>Attendance</h2>
-        <p>The Constitution specifies that a majority of members constitutes a quorum to do business in each house.
-          Representatives and senators rarely force the presence of a quorum by demanding quorum calls; thus, in most
-          cases,
-          debates continue even if a majority is not present.</p>
-
-        <p>The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator stating "aye"
-          or
-          "no" when his or her name is announced. The House reserves roll-call votes for the most formal matters, as a
-          roll-call of all 435 representatives takes quite some time; normally, members vote by electronic device. In
-          the
-          case of a tie, the motion in question fails. In the Senate, the Vice President may (if present) cast the
-          tiebreaking vote.</p>
+        <h2>Party Loyalty</h2>
+        <p>Those who consider themselves to be strong partisans, strong Democrats and strong Republicans
+          respectively, tend to be the most faithful in voting for their party's nominee for office and
+          legislation that backs their party's agenda. </p>
       </div>
       <div class="block-text py-2 col-12 col-md-6">
-        <h4 class="text-right">Senate at a glance</h4>
+        <h4 class="text-right">House at a glance</h4>
         <table class="table table-bordered table-hover table-dark table-responsive-sm">
           <thead class="thead-light">
             <tr>
               <th>Party</th>
-              <th># of Reps</th>
+              <th>Number of Reps</th>
               <th>% Voted with Party</th>
             </tr>
           </thead>
@@ -116,30 +107,30 @@
 
     <div class="row">
       <div class="block-text py-2 col-12 col-md-6">
-        <h4>Least Engaged (Bottom 10% Attendance)</h4>
+        <h4>Least Loyal (Bottom 10% of Party)</h4>
         <table class="table table-bordered table-hover table-dark table-responsive-sm">
           <thead class="thead-light">
             <tr>
               <th>Name</th>
-              <th># of Missed Votes</th>
-              <th>% Missed</th>
+              <th>Number of Missed Votes</th>
+              <th>% Party Votes</th>
             </tr>
           </thead>
-          <tbody id="senate-least-engaged">
+          <tbody>
           </tbody>
         </table>
       </div>
       <div class="block-text py-2 col-12 col-md-6">
-        <h4>Most Engaged (Top 10% Attendance)</h4>
+        <h4>Most Loyal (Top 10% of Party)</h4>
         <table class="table table-bordered table-hover table-dark table-responsive-sm">
           <thead class="thead-light">
             <tr>
               <th>Name</th>
-              <th># of Missed Votes</th>
-              <th>% Missed</th>
+              <th>Number of Missed Votes</th>
+              <th>% Party Votes</th>
             </tr>
           </thead>
-          <tbody id="senate-most-engaged">
+          <tbody>
           </tbody>
         </table>
       </div>
@@ -163,7 +154,7 @@
 
   <script src="./js/senate113.js"></script>
   <script src="./js/house113.js"></script>
-  <script src="./js/attendanceSenate.js"></script>
+  <!-- <script src="./js/main3.js"></script> -->
 
 </body>
 

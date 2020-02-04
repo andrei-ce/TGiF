@@ -1,9 +1,3 @@
-// document.getElementById("id");
-// element.innerHTML;
-// document.createElement("p");
-// element.appendChild(node);
-// element.setAttribute("name", "value");
-
 //Select where to insert all data - in this case tbody
   // Loop through all members in array
     //Create new <tr> for every member until i<number of members
@@ -25,11 +19,19 @@ for (let i=0; i< mySenateMembers.length; i++) {
     for  (let j=0; j< fieldsInserted.length; j++) {
       let dataInserted = fieldsInserted[j];
       let newTd = document.createElement("td");
-      newTd.innerHTML = mySenateMembers[i][dataInserted]
-      if (j==0 && mySenateMembers[i].middle_name != null) {
-        newTd.innerHTML = `${newTd.innerHTML} ${mySenateMembers[i].middle_name} ${mySenateMembers[i].last_name}`;
-      } else if (j==0) {
-        newTd.innerHTML = `${newTd.innerHTML} ${mySenateMembers[i].last_name}`;
+      if (j==0) {
+        let newAnchorTag = document.createElement("a");
+        newAnchorTag.setAttribute("href",mySenateMembers[i].url);
+        newAnchorTag.innerHTML = mySenateMembers[i][dataInserted];
+        if (j==0 && mySenateMembers[i].middle_name != null) {
+          newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${mySenateMembers[i].middle_name} ${mySenateMembers[i].last_name}`;
+        } else {
+          newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${mySenateMembers[i].last_name}`;
+        }
+        newTd.appendChild(newAnchorTag);
+      }
+      else {
+        newTd.innerHTML = mySenateMembers[i][dataInserted];
       }
       newTr.appendChild(newTd);
     }

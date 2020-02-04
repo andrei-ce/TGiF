@@ -45,7 +45,7 @@
                 aria-haspopup="true" aria-expanded="false"><i class="fas fa-tasks"></i> Attendance</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="./senate_att.html"> SENATE</a>
-                <a class="dropdown-item" href="#"> HOUSE</a>
+                <a class="dropdown-item" href="./house_att.html"> HOUSE</a>
               </div>
             </li>
             <li class="nav-item dropdown">
@@ -53,7 +53,7 @@
                 aria-haspopup="true" aria-expanded="false"><i class="far fa-star"></i> Loyalty</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="./senate_loyalty.html"> SENATE</a>
-                <a class="dropdown-item" href="#"> HOUSE</a>
+                <a class="dropdown-item" href="./house_loyalty.html"> HOUSE</a>
               </div>
             </li>
           </ul>
@@ -88,7 +88,7 @@
     </div>
     <div class="block-text py-3">
       <h3>Background History of Government Transparency</h3>
-      <span id="dots">...</span><span id="more">
+      <span id="more-text">
         <p>In the West, the idea that government should be open to public
           scrutiny and susceptible to public opinion dates
           back at least to the time of the Enlightenment, when many philosophes made an attack on absolutist doctrine of
@@ -120,9 +120,7 @@
           (AIAs) or equivalent laws were passed in Denmark and Norway in 1970.</p>
       </span>
     </div>
-    <button onclick="readMoreLess()" class="btn btn-outline-primary btn-sm" id="moreBtn">
-      Read More
-    </button>
+    <button onclick="readMoreLess()" class="btn btn-link pl-0" id="more-btn">Read more...</button>
   </div>
   <footer>
     <p>&reg; All rights reserved to Transparent Government in Fact</p>
@@ -140,18 +138,15 @@
     crossorigin="anonymous"></script>
   <script>
     function readMoreLess() {
-      var dots = document.getElementById("dots");
-      var moreText = document.getElementById("more");
-      var btnText = document.getElementById("moreBtn");
+      var moreBtn = document.getElementById("more-btn");
+      var moreText = document.getElementById("more-text");
 
-      if (dots.style.display === "none") {
-        dots.style.display = "inline";
-        btnText.innerHTML = "Read more";
-        moreText.style.display = "none";
-      } else {
-        dots.style.display = "none";
-        btnText.innerHTML = "Read less";
+      if (moreBtn.innerHTML === "Read more...") {
+        moreBtn.innerHTML = "Read less";
         moreText.style.display = "inline";
+      } else {
+        moreBtn.innerHTML = "Read more...";
+        moreText.style.display = "none";
       }
     }
   </script>
