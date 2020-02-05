@@ -58,7 +58,7 @@
 						</li>
 					</ul>
 					<ul class="navbar-nav">
-						<li class="nav-item border border-warning" id="email">
+            <li class="nav-item" id="email">
 							<a class="nav-link" href="mailto:info@tgif.net"><i class="fas fa-envelope"></i>
 								info@tgif.net</a>
 						</li>
@@ -82,7 +82,7 @@
 					<thead class="thead-light">
 						<tr>
 							<th>Party</th>
-							<th>Number of Reps</th>
+							<th># of Reps</th>
 							<th>% Voted with Party</th>
 						</tr>
 					</thead>
@@ -112,11 +112,11 @@
 					<thead class="thead-light">
 						<tr>
 							<th>Name</th>
-							<th>Number of Missed Votes</th>
+							<th># of Missed Votes</th>
 							<th>% Party Votes</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="senate-least-loyal">
 					</tbody>
 				</table>
 			</div>
@@ -126,11 +126,11 @@
 					<thead class="thead-light">
 						<tr>
 							<th>Name</th>
-							<th>Number of Missed Votes</th>
+							<th># of Missed Votes</th>
 							<th>% Party Votes</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="senate-most-loyal">
 					</tbody>
 				</table>
 			</div>
@@ -153,8 +153,7 @@
 		crossorigin="anonymous"></script>
 
 	<script src="./js/senate113.js"></script>
-	<script src="./js/house113.js"></script>
-	<!-- <script src="./js/main3.js"></script> -->
+	<script src="./js/loyaltySenate.js"></script>
 
 </body>
 

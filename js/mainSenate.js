@@ -1,39 +1,34 @@
-//Select where to insert all data - in this case tbody
-  // Loop through all members in array
-    //Create new <tr> for every member until i<number of members
-      //Loop through all data to be inserted (5 in total - the columns)
-      //Create <td>
-      //Insert data in <td>
-      //Append <td> to <tr> 
-    //}
-  //Append <tr> to Table
-//}  
+const senateMembers = data.results[0].members;
 
-const mySenateMembers = dataSenate113.results[0].members;
-let fieldsInserted = ["first_name", "party", "state", "seniority", "votes_with_party_pct"];
+createTableAllMembers(senateMembers);
 
-let tBody = document.getElementById("senate-data");
+function createTableAllMembers(members) {
+  let fieldsInserted = ["first_name", "party", "state", "seniority", "votes_with_party_pct"];
+  let tBody = document.getElementById("all-members");
 
-for (let i=0; i< mySenateMembers.length; i++) {
-  let newTr = document.createElement("tr");
-    for  (let j=0; j< fieldsInserted.length; j++) {
+  for (let i = 0; i < members.length; i++) {
+    let newTr = document.createElement("tr");
+    for (let j = 0; j < fieldsInserted.length; j++) {
       let dataInserted = fieldsInserted[j];
       let newTd = document.createElement("td");
-      if (j==0) {
+      // First, middle & last name loop
+      if (j == 0) {
+        // Anchor tag creation
         let newAnchorTag = document.createElement("a");
-        newAnchorTag.setAttribute("href",mySenateMembers[i].url);
-        newAnchorTag.innerHTML = mySenateMembers[i][dataInserted];
-        if (j==0 && mySenateMembers[i].middle_name != null) {
-          newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${mySenateMembers[i].middle_name} ${mySenateMembers[i].last_name}`;
+        newAnchorTag.setAttribute("href", members[i].url);
+        newAnchorTag.setAttribute("target", "_blank");
+        newAnchorTag.innerHTML = members[i][dataInserted];
+        if (j == 0 && members[i].middle_name != null) {
+          fullname = newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${members[i].middle_name} ${members[i].last_name}`;
         } else {
-          newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${mySenateMembers[i].last_name}`;
+          newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${members[i].last_name}`;
         }
         newTd.appendChild(newAnchorTag);
-      }
-      else {
-        newTd.innerHTML = mySenateMembers[i][dataInserted];
+      } else {
+        newTd.innerHTML = members[i][dataInserted];
       }
       newTr.appendChild(newTd);
     }
-  tBody.appendChild(newTr);
+    tBody.appendChild(newTr);
+  }
 }

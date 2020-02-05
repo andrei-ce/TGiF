@@ -1,4 +1,4 @@
-const senateMembers = data.results[0].members;
+const houseMembers = data.results[0].members;
 
 //****** CREATE LIST FOR EACH PARTY */
 //initialize new array lists with name of parties
@@ -6,14 +6,14 @@ let republicanMembers = [];
 let democratMembers = [];
 let independentMembers = [];
 //go through all members in senate
-for (let i = 0; i < senateMembers.length; i++) {
+for (let i = 0; i < houseMembers.length; i++) {
   //if party === republican, push to republicanMembers array list
-  if (senateMembers[i].party === "R") {
-    republicanMembers.push(senateMembers[i]);
-  } else if (senateMembers[i].party === "D") {
-    democratMembers.push(senateMembers[i]);
+  if (houseMembers[i].party === "R") {
+    republicanMembers.push(houseMembers[i]);
+  } else if (houseMembers[i].party === "D") {
+    democratMembers.push(houseMembers[i]);
   } else {
-    independentMembers.push(senateMembers[i]);
+    independentMembers.push(houseMembers[i]);
   }
 }
 
@@ -31,10 +31,10 @@ function averageVotesWithParty(arr) {
 let stats = {
   republicanTotal: republicanMembers.length,
   democratTotal: democratMembers.length,
-  independentTotal: independentMembers.length,
+  independentTotal: "--",
   republicanAvgVotesWithParty: averageVotesWithParty(republicanMembers).toFixed(2),
   democratAvgVotesWithParty: averageVotesWithParty(democratMembers).toFixed(2),
-  independentAvgVotesWithParty: averageVotesWithParty(independentMembers).toFixed(2)
+  independentAvgVotesWithParty: "--"
 };
 
 let dataAtGlance = ["", "", "", "", "", ""]; //maybe loop through the data needed in the "at glance" table?
@@ -73,41 +73,39 @@ indAtGlance.appendChild(newTd);
 let totalAtGlance = document.getElementById("total-at-glance");
 var newTd = document.createElement("td");
 newTd.className = "text-center";
-newTd.innerHTML = senateMembers.length;
+newTd.innerHTML = houseMembers.length;
 totalAtGlance.appendChild(newTd);
 var newTd = document.createElement("td");
 newTd.className = "text-center";
 newTd.innerHTML = (
-  (stats.republicanTotal * stats.republicanAvgVotesWithParty +
-    stats.democratTotal * stats.democratAvgVotesWithParty +
-    stats.independentTotal * stats.independentAvgVotesWithParty) /
-  senateMembers.length
+  (stats.republicanTotal * stats.republicanAvgVotesWithParty + stats.democratTotal * stats.democratAvgVotesWithParty) /
+  houseMembers.length
 ).toFixed(2);
 totalAtGlance.appendChild(newTd);
 
 // create sorted list by least votes_with_party
-let senateMembersSorted = senateMembers.sort((a, b) => {
+let houseMembersSorted = houseMembers.sort((a, b) => {
   return b.votes_with_party_pct - a.votes_with_party_pct;
 });
 
 // create least and most engaged lists
 let leastLoyal = [];
 let againstVotesLeastLoyal = [];
-for (let i = 0; i < senateMembers.length; i++) {
+for (let i = 0; i < houseMembers.length; i++) {
   // add members until it reaches (current sum of votes_with_party_pct)/ <= 10% of members
-  if (leastLoyal.length < Math.round(senateMembers.length * 0.1) || againstVotesLeastLoyal.includes(senateMembersSorted[i].votes_with_party_pct)) {
-    leastLoyal.push(senateMembersSorted[i]);
-    againstVotesLeastLoyal.push(senateMembersSorted[i].votes_with_party_pct);
+  if (leastLoyal.length < Math.round(houseMembers.length * 0.1) || againstVotesLeastLoyal.includes(houseMembersSorted[i].votes_with_party_pct)) {
+    leastLoyal.push(houseMembersSorted[i]);
+    againstVotesLeastLoyal.push(houseMembersSorted[i].votes_with_party_pct);
   }
 }
 
 let mostLoyal = [];
 let againstVotesMostLoyal = [];
-for (let i = senateMembers.length - 1; i >= 0; i--) {
+for (let i = houseMembers.length - 1; i >= 0; i--) {
   // add members until it reaches (current sum of votes_with_party_pct) >= 10% of members
-  if (mostLoyal.length < Math.round(senateMembers.length * 0.1) || againstVotesMostLoyal.includes(senateMembersSorted[i].votes_with_party_pct)) {
-    mostLoyal.push(senateMembersSorted[i]);
-    againstVotesMostLoyal.push(senateMembersSorted[i].votes_with_party_pct);
+  if (mostLoyal.length < Math.round(houseMembers.length * 0.1) || againstVotesMostLoyal.includes(houseMembersSorted[i].votes_with_party_pct)) {
+    mostLoyal.push(houseMembersSorted[i]);
+    againstVotesMostLoyal.push(houseMembersSorted[i].votes_with_party_pct);
   }
 }
 
@@ -115,7 +113,7 @@ for (let i = senateMembers.length - 1; i >= 0; i--) {
 let fieldsInserted = ["first_name", "missed_votes", "votes_with_party_pct"];
 
 // append variables to HTML elements & ultimately to table
-let tBody2 = document.getElementById("senate-least-loyal");
+let tBody2 = document.getElementById("house-least-loyal");
 for (let i = 0; i < leastLoyal.length; i++) {
   let newTr = document.createElement("tr");
   for (let j = 0; j < fieldsInserted.length; j++) {
@@ -144,7 +142,7 @@ for (let i = 0; i < leastLoyal.length; i++) {
   tBody2.appendChild(newTr);
 }
 
-let tBody3 = document.getElementById("senate-most-loyal");
+let tBody3 = document.getElementById("house-most-loyal");
 for (let i = 0; i < mostLoyal.length; i++) {
   let newTr = document.createElement("tr");
   for (let j = 0; j < fieldsInserted.length; j++) {

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
   <!-- Font Awesome CSS -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
     integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />
@@ -58,7 +58,7 @@
             </li>
           </ul>
           <ul class="navbar-nav">
-            <li class="nav-item border border-warning" id="email">
+            <li class="nav-item" id="email">
               <a class="nav-link" href="mailto:info@tgif.net"><i class="fas fa-envelope"></i>
                 info@tgif.net</a>
             </li>
@@ -72,18 +72,22 @@
     <div class="row">
       <div class="block-text py-2 col-12 col-md-6">
         <h2>Attendance</h2>
-        <p>The Constitution specifies that a majority of members constitutes a quorum to do business in each house.
-          Representatives and senators rarely force the presence of a quorum by demanding quorum calls; thus, in most
-          cases,
-          debates continue even if a majority is not present.</p>
+        <p>
+          The Constitution specifies that a majority of members constitutes a quorum to do business in each house.
+          Representatives and senators
+          rarely force the presence of a quorum by demanding quorum calls; thus, in most cases, debates continue even if
+          a majority is not present.
+        </p>
 
-        <p>The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator stating "aye"
-          or
-          "no" when his or her name is announced. The House reserves roll-call votes for the most formal matters, as a
-          roll-call of all 435 representatives takes quite some time; normally, members vote by electronic device. In
-          the
-          case of a tie, the motion in question fails. In the Senate, the Vice President may (if present) cast the
-          tiebreaking vote.</p>
+        <p>
+          The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator stating "aye"
+          or "no" when his or her name
+          is announced. The House reserves roll-call votes for the most formal matters, as a roll-call of all 435
+          representatives takes quite some
+          time; normally, members vote by electronic device. In the case of a tie, the motion in question fails. In the
+          Senate, the Vice President
+          may (if present) cast the tiebreaking vote.
+        </p>
       </div>
       <div class="block-text py-2 col-12 col-md-6">
         <h4 class="text-right">Senate at a glance</h4>
@@ -113,7 +117,6 @@
       </div>
     </div>
 
-
     <div class="row">
       <div class="block-text py-2 col-12 col-md-6">
         <h4>Least Engaged (Bottom 10% Attendance)</h4>
@@ -125,8 +128,7 @@
               <th>% Missed</th>
             </tr>
           </thead>
-          <tbody id="senate-least-engaged">
-          </tbody>
+          <tbody id="senate-least-engaged"></tbody>
         </table>
       </div>
       <div class="block-text py-2 col-12 col-md-6">
@@ -139,8 +141,7 @@
               <th>% Missed</th>
             </tr>
           </thead>
-          <tbody id="senate-most-engaged">
-          </tbody>
+          <tbody id="senate-most-engaged"></tbody>
         </table>
       </div>
     </div>
@@ -162,9 +163,7 @@
     crossorigin="anonymous"></script>
 
   <script src="./js/senate113.js"></script>
-  <script src="./js/house113.js"></script>
   <script src="./js/attendanceSenate.js"></script>
-
 </body>
 
 </html>
