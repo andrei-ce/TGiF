@@ -48,7 +48,7 @@ function createDataAtGlance() {
   repAtGlance.appendChild(newTd);
   var newTd = document.createElement("td");
   newTd.className = "text-center";
-  newTd.innerHTML = stats.republicanAvgVotesWithParty;
+  newTd.innerHTML = stats.republicanAvgVotesWithParty + '%';
   repAtGlance.appendChild(newTd);
 
   let demAtGlance = document.getElementById("dem-at-glance");
@@ -58,7 +58,7 @@ function createDataAtGlance() {
   demAtGlance.appendChild(newTd);
   var newTd = document.createElement("td");
   newTd.className = "text-center";
-  newTd.innerHTML = stats.democratAvgVotesWithParty;
+  newTd.innerHTML = stats.democratAvgVotesWithParty + '%';
   demAtGlance.appendChild(newTd);
 
   let indAtGlance = document.getElementById("ind-at-glance");
@@ -81,7 +81,7 @@ function createDataAtGlance() {
   newTd.innerHTML = (
     (stats.republicanTotal * stats.republicanAvgVotesWithParty + stats.democratTotal * stats.democratAvgVotesWithParty) /
     houseMembers.length
-  ).toFixed(2);
+  ).toFixed(2) + '%';
   totalAtGlance.appendChild(newTd);
 }
 //****** 10% LEAST & MOST ENGAGED*/
@@ -136,7 +136,9 @@ for (let i = 0; i < leastEngaged.length; i++) {
       newTd.appendChild(newAnchorTag);
     }
     // <td>name</td>
-    else {
+    else if (j === 2) {
+      newTd.innerHTML = leastEngaged[i][dataInserted] + '%';
+    } else {
       newTd.innerHTML = leastEngaged[i][dataInserted];
     }
     newTr.appendChild(newTd);
@@ -161,6 +163,8 @@ for (let i = 0; i < mostEngaged.length; i++) {
         newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${mostEngaged[i].last_name}`;
       }
       newTd.appendChild(newAnchorTag);
+    } else if (j === 2) {
+      newTd.innerHTML = mostEngaged[i][dataInserted] + '%';
     } else {
       newTd.innerHTML = mostEngaged[i][dataInserted];
     }
