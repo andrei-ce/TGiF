@@ -1,27 +1,33 @@
 const senateMembers = data.results[0].members;
 
-createTable(senateMembers);
+printTable(senateMembers, ["D", "R", "I"]);
 
 //Listen to any click on checkboxes, and call the function createTable
-let checkBoxGroup = [...document.getElementsByName("filter")];
-for (i = 0; i < checkBoxGroup.length; i++) {
-  checkBoxGroup[i].addEventListener("click", a => createTable(senateMembers));
+let checkBoxGroup = document.getElementsByName("filter");
+checkBoxGroup.forEach(checkbox => checkbox.addEventListener("click", () => applyFilters()))
+// for (i = 0; i < checkBoxGroup.length; i++) {
+//   checkBoxGroup[i].addEventListener("click", a => createTable(senateMembers));
+// }
+
+function applyFilters() {
+  //get what parties to show (outputs array with ["D", "I"], for example)
+  let checkboxFilters = Array.from(document.querySelectorAll('input[name=filter]:checked')).map(array => array.value);
+  console.log("Filters: " + checkboxFilters);
+  printTable(senateMembers, checkboxFilters)
 }
 
-function createTable(members) {
+function printTable(members, filter1) {
   //delete old table
   membersShowing.innerHTML = "";
-  //get what parties to show (outputs array with ["D", "I"], for example)
-  var partiesToShow = Array.from(document.querySelectorAll('input[name=filter]:checked')).map(array => array.value);
-  console.log("Filters: " + partiesToShow);
+
   //create and select where to insert new data, and what jeys to show
-  var newBody = document.getElementById("membersShowing");
+  let newBody = document.getElementById("membersShowing");
   let fieldsInserted = ["first_name", "party", "state", "seniority", "votes_with_party_pct"];
 
   //pick first member i => checks if his/her party is selected in partiesToShow => creates and fills rows and cells 
   // => if first td, and middle name not null, go into the middle name loop (and add URL)
   for (let i = 0; i < members.length; i++) {
-    if (partiesToShow.includes(members[i].party) || partiesToShow.length < 1) {
+    if (filter1.includes(members[i].party) || filter1.length < 1) {
       let newTr = document.createElement("tr");
       for (let j = 0; j < fieldsInserted.length; j++) {
         let dataInserted = fieldsInserted[j];

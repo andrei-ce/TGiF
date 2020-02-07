@@ -1,24 +1,25 @@
 const houseMembers = data.results[0].members;
 
 //Loads initial table
-createTable(houseMembers);
+printTable(houseMembers, ["D", "R", "I"]);
 
 //Event listener on checkboxes
 let checkBoxGroup = document.getElementsByName("filter");
-for (i = 0; i < checkBoxGroup.length; i++) {
-  checkBoxGroup[i].addEventListener("click", a => createTable(houseMembers));
+checkBoxGroup.forEach(checkbox => checkbox.addEventListener("click", () => applyFilters()))
+
+function applyFilters() {
+  let checkBoxFilters = Array.from(document.querySelectorAll('input[name=filter]:checked')).map(array => array.value);
+  printTable(houseMembers, checkBoxFilters)
 }
 
-function createTable(members) {
+function printTable(members, filter1) {
   membersShowing.innerHTML = "";
 
-  var partiesToShow = Array.from(document.querySelectorAll('input[name=filter]:checked')).map(array => array.value);
-
-  var newBody = document.getElementById("membersShowing");
+  let newBody = document.getElementById("membersShowing");
   let fieldsInserted = ["first_name", "party", "state", "seniority", "votes_with_party_pct"];
 
   for (let i = 0; i < members.length; i++) {
-    if (partiesToShow.includes(members[i].party) || partiesToShow.length < 1) {
+    if (filter1.includes(members[i].party) || filter1.length < 1) {
       let newTr = document.createElement("tr");
       for (let j = 0; j < fieldsInserted.length; j++) {
         let dataInserted = fieldsInserted[j];
