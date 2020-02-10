@@ -63,6 +63,10 @@ body {
   text-decoration: underline;
 }
 
+#noResults {
+  display: none;
+}
+
 /* ************* FROM & FILTERS ************* */
 
 
