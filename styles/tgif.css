@@ -69,6 +69,17 @@ body {
 
 /* ************* FROM & FILTERS ************* */
 
+.filterTitle{
+  border-bottom: solid 1px white;
+}
+
+form {
+  margin-bottom: 10px;
+}
+
+form span {
+  padding-right: 4px;
+}
 
 /* ************* TABLE ************* */
 tbody a {
