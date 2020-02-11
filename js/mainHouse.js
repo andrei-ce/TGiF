@@ -9,11 +9,11 @@ let stateList = [];
 let membersFilteredByParty = houseMembers;
 let membersFilteredByState = [];
 
-init();
+init(houseMembers);
 
-function init() {
-  printTable(houseMembers);
-  generateStateList(houseMembers);
+function init(members) {
+  printTable(members);
+  generateStateList(members);
   printSelectOptions();
   setupPartyListener();
   setupStateListener();

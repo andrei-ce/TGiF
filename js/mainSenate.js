@@ -9,10 +9,10 @@ let stateList = [];
 let membersFilteredByParty = senateMembers;
 let membersFilteredByState = [];
 
-init();
+init(senateMembers);
 
-function init() {
-  printTable(senateMembers);
+function init(members) {
+  printTable(members);
   generateStateList(senateMembers);
   printSelectOptions();
   setupPartyListener();
