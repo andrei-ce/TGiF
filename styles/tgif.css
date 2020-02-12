@@ -67,7 +67,7 @@ body {
   display: none;
 }
 
-/* ************* FROM & FILTERS ************* */
+/* ************* FORM & FILTERS ************* */
 
 .filterTitle{
   border-bottom: solid 1px white;
@@ -82,6 +82,11 @@ form span {
 }
 
 /* ************* TABLE ************* */
+
+#loader {
+  text-align: center;
+}
+
 tbody a {
   color: white;
 }
