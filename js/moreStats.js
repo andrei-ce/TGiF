@@ -3,14 +3,10 @@ let republicanMembers = [];
 let democratMembers = [];
 let independentMembers = [];
 let memberListSorted = [];
-let leastEngaged = [];
-let mostEngaged = [];
-let leastEngagedTable = document.getElementById("least-engaged");
-let mostEngagedTable = document.getElementById("most-engaged");
+let fieldsLoyalty = ["first_name", "votes_with_party_abs", "votes_with_party_pct"];
 let fieldsAttendance = ["first_name", "missed_votes", "missed_votes_pct"];
 let stats = {};
 let loader = document.querySelectorAll('.loader');
-
 
 //URL WINDOW READER
 let url = window.location.pathname.split("/").pop();
@@ -36,20 +32,25 @@ fetch(chamber, {
   originalMembers = data.results[0].members;
   loader.forEach(l => l.style.display = 'none')
   init(originalMembers);
-})
-// .catch(function (error) {
-//   console.log("Request failed: " + error.message);
-// });
+}).catch(function (error) {
+  console.log("Request failed: " + error.message);
+});
 
+//INITIALIZATION DEPENDS ON ATTENDANCE/LOYALTY
 function init(members) {
-  generatePartyLists(members);
-  setStats();
-  printDataAtGlance(members);
-  sortMembersMissedVotes(members);
-  generateLeastEngaged(members);
-  printLeastEngaged();
-  generateMostEngaged(members);
-  printMostEngaged();
+  if (url.split("_").pop() === "att.html") {
+    generatePartyLists(members);
+    setStats();
+    printDataAtGlance(members);
+    generateLeast(members, "descending", "missed_votes_pct", fieldsAttendance); //list, order, stat, fields
+    generateMost(members, "descending", "missed_votes_pct", fieldsAttendance);
+  } else if (url.split("_").pop() === "loyalty.html") {
+    generatePartyLists(members);
+    setStats();
+    printDataAtGlance(members);
+    generateLeast(members, "ascending", "votes_with_party_pct", fieldsLoyalty);
+    generateMost(members, "ascending", "votes_with_party_pct", fieldsLoyalty);
+  }
 }
 
 function setStats() {
@@ -150,90 +151,80 @@ function printDataAtGlance(members) {
   dataAtGlance.appendChild(newTr);
 }
 
-//----> Possibly make a sort function that takes ascending or descending as argument (then for loop is same in both cases)
-function sortMembersMissedVotes(memberList) {
-  memberListSorted = memberList.sort((a, b) => {
-    return b.missed_votes_pct - a.missed_votes_pct;
-  });
+function sortMembers(list, order, stat) {
+  if (order === "ascending") {
+    memberListSorted = list.sort((a, b) => {
+      return a[stat] - b[stat];
+    })
+  }
+  else if (order === "descending") {
+    memberListSorted = list.sort((a, b) => {
+      return b[stat] - a[stat];
+    })
+  };
 }
 
-function generateLeastEngaged(memberList) {
-  let missedVotesLeastEngaged = [];
+function generateLeast(memberList, order, stat, fields) {
+  sortMembers(memberList, order, stat)
+  let orderedMembers = [];
+  let votesLeast = [];
   for (let i = 0; i < memberList.length; i++) {
-    // add members until it reaches (current sum of missed_votes_pct)/ <= 10% of members
-    if (leastEngaged.length < Math.round(memberList.length * 0.1) || missedVotesLeastEngaged.includes(memberListSorted[i].missed_votes_pct)) {
-      leastEngaged.push(memberListSorted[i]);
-      missedVotesLeastEngaged.push(memberListSorted[i].missed_votes_pct);
+    if (orderedMembers.length < Math.round(memberList.length * 0.1) || votesLeast.includes(memberListSorted[i][stat])) {
+      orderedMembers.push(memberListSorted[i]);
+      votesLeast.push(memberListSorted[i][stat]);
     }
   }
+  orderedMembers.forEach(m => {
+    m.votes_with_party_abs = Math.round((m.total_votes - m.missed_votes) * (m.votes_with_party_pct / 100))
+  });
+  console.log(orderedMembers);
+  print(orderedMembers, "least", fields);
 }
 
-function generateMostEngaged(memberList) {
-  let missedVotesMostEngaged = [];
+function generateMost(memberList, order, stat, fields) {
+  sortMembers(memberList, order, stat)
+  let mostMembers = [];
+  let votesMost = [];
   for (let i = memberList.length - 1; i >= 0; i--) {
-    // add members until it reaches (current sum of missed_votes_pct)/ >= 10% of members
-    if (mostEngaged.length < Math.round(memberList.length * 0.1) || missedVotesMostEngaged.includes(memberListSorted[i].missed_votes_pct)) {
-      mostEngaged.push(memberListSorted[i]);
-      missedVotesMostEngaged.push(memberListSorted[i].missed_votes_pct);
+    if (mostMembers.length < Math.round(memberList.length * 0.1) || votesMost.includes(memberListSorted[i][stat])) {
+      mostMembers.push(memberListSorted[i]);
+      votesMost.push(memberListSorted[i][stat]);
     }
   }
+  mostMembers.forEach(m => {
+    m.votes_with_party_abs = Math.round((m.total_votes - m.missed_votes) * (m.votes_with_party_pct / 100))
+  });
+  console.log(mostMembers);
+  print(mostMembers, "most", fields);
 }
 
-function printLeastEngaged() {
-  for (let i = 0; i < leastEngaged.length; i++) {
+function print(memberList, where, fields) {
+  let table = document.getElementById(where);
+  for (let i = 0; i < memberList.length; i++) {
     let newTr = document.createElement("tr");
-    for (let j = 0; j < fieldsAttendance.length; j++) {
-      let dataInserted = fieldsAttendance[j];
+    for (let j = 0; j < fields.length; j++) {
+      let dataInserted = fields[j];
       let newTd = document.createElement("td");
       // if in position j=0 (name), <a href="member.url">name</a> (insert name as innetHTML of atag)
       if (j == 0) {
         let newAnchorTag = document.createElement("a");
-        newAnchorTag.setAttribute("href", leastEngaged[i].url);
-        newAnchorTag.innerHTML = leastEngaged[i][dataInserted];
-        if (j == 0 && leastEngaged[i].middle_name != null) {
-          newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${leastEngaged[i].middle_name} ${leastEngaged[i].last_name}`;
+        newAnchorTag.setAttribute("href", memberList[i].url);
+        newAnchorTag.innerHTML = memberList[i][dataInserted];
+        if (j == 0 && memberList[i].middle_name != null) {
+          newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${memberList[i].middle_name} ${memberList[i].last_name}`;
         } else {
-          newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${leastEngaged[i].last_name}`;
+          newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${memberList[i].last_name}`;
         }
         // <td><a href="member.url">name</a></td>
         newTd.appendChild(newAnchorTag);
-      }
-      // <td>name</td>
-      else if (j === 2) {
-        newTd.innerHTML = leastEngaged[i][dataInserted] + '%';
+      } else if (j === 2) {
+        newTd.innerHTML = memberList[i][dataInserted] + '%';
       } else {
-        newTd.innerHTML = leastEngaged[i][dataInserted];
+        newTd.innerHTML = memberList[i][dataInserted];
       }
       newTr.appendChild(newTd);
     }
     // <tr><td><a href="member.url">name</a></td></tr>
-    leastEngagedTable.appendChild(newTr);
-  }
-}
-
-function printMostEngaged() {
-  for (let i = 0; i < mostEngaged.length; i++) {
-    let newTr = document.createElement("tr");
-    for (let j = 0; j < fieldsAttendance.length; j++) {
-      let dataInserted = fieldsAttendance[j];
-      let newTd = document.createElement("td");
-      if (j == 0) {
-        let newAnchorTag = document.createElement("a");
-        newAnchorTag.setAttribute("href", mostEngaged[i].url);
-        newAnchorTag.innerHTML = mostEngaged[i][dataInserted];
-        if (j == 0 && mostEngaged[i].middle_name != null) {
-          newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${mostEngaged[i].middle_name} ${mostEngaged[i].last_name}`;
-        } else {
-          newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${mostEngaged[i].last_name}`;
-        }
-        newTd.appendChild(newAnchorTag);
-      } else if (j === 2) {
-        newTd.innerHTML = mostEngaged[i][dataInserted] + '%';
-      } else {
-        newTd.innerHTML = mostEngaged[i][dataInserted];
-      }
-      newTr.appendChild(newTd);
-    }
-    mostEngagedTable.appendChild(newTr);
+    table.appendChild(newTr);
   }
 }
