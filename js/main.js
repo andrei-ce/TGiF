@@ -1,10 +1,11 @@
 // GLOBAL VARIABLES
 let partySelector = document.querySelectorAll('input[type=checkbox]');
 let stateSelector = document.querySelector('#stateSelector');
-let fieldsInserted = ['first_name', 'party', 'state', 'seniority', 'votes_with_party_pct'];
 let newBody = document.querySelector('#membersShowing');
 let noResults = document.querySelector('#noResults');
+let loader = document.querySelectorAll('.loader');
 let stateList = []; //if generateStateList() and printSelectOptions are joined, no global variable is needed
+let fieldsInserted = ['first_name', 'party', 'state', 'seniority', 'votes_with_party_pct'];
 
 //URL WINDOW READER
 let url = window.location.pathname.split("/").pop();
@@ -27,9 +28,9 @@ fetch(chamber, {
   }
   throw new Error(res.statusText) //will throw error only if an error exists (else, res.statusText = OK)
 }).then((data) => {
-  members = data.results[0].members;
-  loader.style.display = "none"
-  init(members);
+  originalMembers = data.results[0].members;
+  loader.forEach(l => l.style.display = 'none')
+  init(originalMembers);
 }).catch(function (error) {
   console.log("Request failed: " + error.message);
 });
@@ -44,11 +45,11 @@ function init(members) {
 
 //LISTEN TO DROPDOWN SELECTOR FORM
 function setupStateListener() {
-  stateSelector.addEventListener("input", function () { filterParty(members) });
+  stateSelector.addEventListener("input", function () { filterParty(originalMembers) });
 }
 //LISTEN TO CHECKBOX FORMS
 function setupPartyListener() {
-  partySelector.forEach(box => box.addEventListener("click", function () { filterParty(members) }));
+  partySelector.forEach(box => box.addEventListener("click", function () { filterParty(originalMembers) }));
 }
 
 //THIS IS THE FIRST FILTER no matter what form you interact with

@@ -91,25 +91,14 @@
           <thead class="thead-light">
             <tr>
               <th>Party</th>
-              <th># of Reps</th>
-              <th>% Voted with Party</th>
+              <th>Members</th>
+              <th>Party Votes (%)</th>
             </tr>
           </thead>
-          <tbody>
-            <tr id="rep-at-glance">
-              <td>Republican</td>
-            </tr>
-            <tr id="dem-at-glance">
-              <td>Democrat</td>
-            </tr>
-            <tr id="ind-at-glance">
-              <td>Independent</td>
-            </tr>
-            <tr id="total-at-glance">
-              <td>Total</td>
-            </tr>
+          <tbody id="dataAtGlance">
           </tbody>
         </table>
+        <div class="loader"><img src="./imgs/rippleLoader.svg" alt="" srcset=""></div>
       </div>
     </div>
 
@@ -121,13 +110,14 @@
           <thead class="thead-light">
             <tr>
               <th>Name</th>
-              <th># of Missed Votes</th>
-              <th>% Missed</th>
+              <th>Missed Votes</th>
+              <th>Missed Votes (%)</th>
             </tr>
           </thead>
-          <tbody id="house-least-engaged">
+          <tbody id="least-engaged">
           </tbody>
         </table>
+        <div class="loader"><img src="./imgs/rippleLoader.svg" alt="" srcset=""></div>
       </div>
       <div class="block-text py-2 col-12 col-lg-6">
         <h4>Most Engaged (Top 10% Attendance)</h4>
@@ -135,13 +125,14 @@
           <thead class="thead-light">
             <tr>
               <th>Name</th>
-              <th># of Missed Votes</th>
-              <th>% Missed</th>
+              <th>Missed Votes</th>
+              <th>Missed Votes (%)</th>
             </tr>
           </thead>
-          <tbody id="house-most-engaged">
+          <tbody id="most-engaged">
           </tbody>
         </table>
+        <div class="loader"><img src="./imgs/rippleLoader.svg" alt="" srcset=""></div>
       </div>
     </div>
   </div>
@@ -161,8 +152,7 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 
-  <script src="./js/house113.js"></script>
-  <script src="./js/attendanceHouse.js"></script>
+  <script src="./js/attendance.js"></script>
 
 </body>
 

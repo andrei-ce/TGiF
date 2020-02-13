@@ -1,22 +1,51 @@
-const houseMembers = data.results[0].members;
+//GLOBAL VARIABLES
 let republicanMembers = [];
 let democratMembers = [];
 let independentMembers = [];
 let memberListSorted = [];
 let leastEngaged = [];
 let mostEngaged = [];
-let leastEngagedHouse = document.getElementById("house-least-engaged");
-let mostEngagedHouse = document.getElementById("house-most-engaged");
-let fieldsInserted = ["first_name", "missed_votes", "missed_votes_pct"];
+let leastEngagedTable = document.getElementById("least-engaged");
+let mostEngagedTable = document.getElementById("most-engaged");
+let fieldsAttendance = ["first_name", "missed_votes", "missed_votes_pct"];
 let stats = {};
+let loader = document.querySelectorAll('.loader');
 
-init(houseMembers);
+
+//URL WINDOW READER
+let url = window.location.pathname.split("/").pop();
+let chamber;
+if (url === "senate_att.html" || url === "senate_loyalty.html") {
+  chamber = "https://api.propublica.org/congress/v1/113/senate/members.json";
+} else if (url === "house_att.html" || url === "house_loyalty.html") {
+  chamber = "https://api.propublica.org/congress/v1/113/house/members.json"
+}
+
+//FETCH DATA ACCORDING TO HTML WINDOW LOCATION
+fetch(chamber, {
+  method: "GET",
+  headers: {
+    'X-API-KEY': "lbIexHSOJM4TcjsZnHyF1WYVzjkAaZsYzncPFRJn"
+  }
+}).then((res) => {
+  if (res.ok) { //if response.ok exists, transform response into a json object
+    return res.json();
+  }
+  throw new Error(res.statusText) //will throw error only if an error exists (else, res.statusText = OK)
+}).then((data) => {
+  originalMembers = data.results[0].members;
+  loader.forEach(l => l.style.display = 'none')
+  init(originalMembers);
+})
+// .catch(function (error) {
+//   console.log("Request failed: " + error.message);
+// });
 
 function init(members) {
   generatePartyLists(members);
   setStats();
-  printDataAtGlance();
-  sortMembers(members);
+  printDataAtGlance(members);
+  sortMembersMissedVotes(members);
   generateLeastEngaged(members);
   printLeastEngaged();
   generateMostEngaged(members);
@@ -54,55 +83,75 @@ function averageVotesWithParty(arr) {
   return average;
 }
 
-//How to refactor/shortenq this?
-function printDataAtGlance() {
-  let repAtGlance = document.getElementById("rep-at-glance");
-  var newTd = document.createElement("td");
-  newTd.className = "text-center";
-  newTd.innerHTML = stats.republicanTotal;
-  repAtGlance.appendChild(newTd);
-  var newTd = document.createElement("td");
-  newTd.className = "text-center";
-  newTd.innerHTML = stats.republicanAvgVotesWithParty + '%';
-  repAtGlance.appendChild(newTd);
-
-  let demAtGlance = document.getElementById("dem-at-glance");
-  var newTd = document.createElement("td");
-  newTd.className = "text-center";
-  newTd.innerHTML = stats.democratTotal;
-  demAtGlance.appendChild(newTd);
-  var newTd = document.createElement("td");
-  newTd.className = "text-center";
-  newTd.innerHTML = stats.democratAvgVotesWithParty + '%';
-  demAtGlance.appendChild(newTd);
-
-  let indAtGlance = document.getElementById("ind-at-glance");
-  var newTd = document.createElement("td");
-  newTd.className = "text-center";
-  newTd.innerHTML = '--';
-  indAtGlance.appendChild(newTd);
-  var newTd = document.createElement("td");
-  newTd.className = "text-center";
-  newTd.innerHTML = '--';
-  indAtGlance.appendChild(newTd);
-
-  let totalAtGlance = document.getElementById("total-at-glance");
-  var newTd = document.createElement("td");
-  newTd.className = "text-center";
-  newTd.innerHTML = houseMembers.length;
-  totalAtGlance.appendChild(newTd);
-  var newTd = document.createElement("td");
-  newTd.className = "text-center";
-  newTd.innerHTML = (
-    (stats.republicanTotal * stats.republicanAvgVotesWithParty +
-      stats.democratTotal * stats.democratAvgVotesWithParty) /
-    houseMembers.length
-  ).toFixed(2) + '%';
-  totalAtGlance.appendChild(newTd);
+function printDataAtGlance(members) {
+  let dataAtGlance = document.querySelector('#dataAtGlance');
+  //Republicans row
+  var newTr = document.createElement("tr");
+  var newTd1 = document.createElement("td");
+  newTd1.textContent = "Republicans";
+  var newTd2 = document.createElement("td");
+  newTd2.className = "text-center";
+  newTd2.innerHTML = stats.republicanTotal;
+  var newTd3 = document.createElement("td");
+  newTd3.className = "text-center";
+  newTd3.innerHTML = stats.republicanAvgVotesWithParty + '%';
+  newTr.appendChild(newTd1);
+  newTr.appendChild(newTd2);
+  newTr.appendChild(newTd3);
+  dataAtGlance.appendChild(newTr);
+  //Democrats row
+  var newTr = document.createElement("tr");
+  var newTd1 = document.createElement("td");
+  newTd1.textContent = "Democrats";
+  var newTd2 = document.createElement("td");
+  newTd2.className = "text-center";
+  newTd2.innerHTML = stats.democratTotal;
+  var newTd3 = document.createElement("td");
+  newTd3.className = "text-center";
+  newTd3.innerHTML = stats.democratAvgVotesWithParty + '%';
+  newTr.appendChild(newTd1);
+  newTr.appendChild(newTd2);
+  newTr.appendChild(newTd3);
+  dataAtGlance.appendChild(newTr);
+  //Independent row
+  var newTr = document.createElement("tr");
+  var newTd1 = document.createElement("td");
+  newTd1.textContent = "Independent";
+  var newTd2 = document.createElement("td");
+  newTd2.className = "text-center";
+  if (!independentMembers.length) {
+    newTd2.textContent = "--";
+  } else { newTd2.textContent = stats.independentTotal };
+  newTd2.innerHTML = '--';
+  var newTd3 = document.createElement("td");
+  newTd3.className = "text-center";
+  if (!independentMembers.length) {
+    newTd3.textContent = "--";
+  } else { newTd3.textContent = stats.independentAvgVotesWithParty + '%' };
+  newTr.appendChild(newTd1);
+  newTr.appendChild(newTd2);
+  newTr.appendChild(newTd3);
+  dataAtGlance.appendChild(newTr);
+  //Total row
+  var newTr = document.createElement("tr");
+  var newTd1 = document.createElement("td");
+  newTd1.textContent = "TOTAL";
+  var newTd2 = document.createElement("td");
+  newTd2.className = "text-center";
+  newTd2.innerHTML = members.length;
+  var newTd3 = document.createElement("td");
+  newTd3.className = "text-center";
+  if (!independentMembers.length) {
+    newTd3.textContent = ((stats.republicanTotal * stats.republicanAvgVotesWithParty + stats.democratTotal * stats.democratAvgVotesWithParty) / members.length).toFixed(2) + '%'
+  } else { newTd3.innerHTML = ((stats.republicanTotal * stats.republicanAvgVotesWithParty + stats.democratTotal * stats.democratAvgVotesWithParty + stats.independentTotal * stats.independentAvgVotesWithParty) / members.length).toFixed(2) + '%'; }
+  newTr.appendChild(newTd1);
+  newTr.appendChild(newTd2);
+  newTr.appendChild(newTd3);
+  dataAtGlance.appendChild(newTr);
 }
 
 //----> Possibly make a sort function that takes ascending or descending as argument (then for loop is same in both cases)
-function sortMembers(memberList) {
+function sortMembersMissedVotes(memberList) {
   memberListSorted = memberList.sort((a, b) => {
     return b.missed_votes_pct - a.missed_votes_pct;
   });
@@ -133,8 +182,8 @@ function generateMostEngaged(memberList) {
 function printLeastEngaged() {
   for (let i = 0; i < leastEngaged.length; i++) {
     let newTr = document.createElement("tr");
-    for (let j = 0; j < fieldsInserted.length; j++) {
-      let dataInserted = fieldsInserted[j];
+    for (let j = 0; j < fieldsAttendance.length; j++) {
+      let dataInserted = fieldsAttendance[j];
       let newTd = document.createElement("td");
       // if in position j=0 (name), <a href="member.url">name</a> (insert name as innetHTML of atag)
       if (j == 0) {
@@ -158,15 +207,15 @@ function printLeastEngaged() {
       newTr.appendChild(newTd);
     }
     // <tr><td><a href="member.url">name</a></td></tr>
-    leastEngagedHouse.appendChild(newTr);
+    leastEngagedTable.appendChild(newTr);
   }
 }
 
 function printMostEngaged() {
   for (let i = 0; i < mostEngaged.length; i++) {
     let newTr = document.createElement("tr");
-    for (let j = 0; j < fieldsInserted.length; j++) {
-      let dataInserted = fieldsInserted[j];
+    for (let j = 0; j < fieldsAttendance.length; j++) {
+      let dataInserted = fieldsAttendance[j];
       let newTd = document.createElement("td");
       if (j == 0) {
         let newAnchorTag = document.createElement("a");
@@ -185,6 +234,6 @@ function printMostEngaged() {
       }
       newTr.appendChild(newTd);
     }
-    mostEngagedHouse.appendChild(newTr);
+    mostEngagedTable.appendChild(newTr);
   }
 }

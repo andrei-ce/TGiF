@@ -82,25 +82,14 @@
           <thead class="thead-light">
             <tr>
               <th>Party</th>
-              <th># of Reps</th>
-              <th>% Voted with Party</th>
+              <th>Members</th>
+              <th>Party Votes (%)</th>
             </tr>
           </thead>
-          <tbody>
-            <tr id="rep-at-glance">
-              <td>Republican</td>
-            </tr>
-            <tr id="dem-at-glance">
-              <td>Democrat</td>
-            </tr>
-            <tr id="ind-at-glance">
-              <td>Independent</td>
-            </tr>
-            <tr id="total-at-glance">
-              <td>Total</td>
-            </tr>
+          <tbody ID="dataAtGlance">
           </tbody>
         </table>
+        <div class="loader"><img src="./imgs/rippleLoader.svg" alt="" srcset=""></div>
       </div>
     </div>
 
@@ -112,13 +101,14 @@
           <thead class="thead-light">
             <tr>
               <th>Name</th>
-              <th># of Party Votes</th>
-              <th>% Party Votes</th>
+              <th>Party Votes</th>
+              <th>Party Votes (%)</th>
             </tr>
           </thead>
-          <tbody id="house-least-loyal">
+          <tbody id="least-loyal">
           </tbody>
         </table>
+        <div class="loader"><img src="./imgs/rippleLoader.svg" alt="" srcset=""></div>
       </div>
       <div class="block-text py-2 col-12 col-md-6">
         <h4>Most Loyal (Top 10% of Party)</h4>
@@ -126,13 +116,14 @@
           <thead class="thead-light">
             <tr>
               <th>Name</th>
-              <th># of Party Votes</th>
-              <th>% Party Votes</th>
+              <th>Party Votes</th>
+              <th>Party Votes (%)</th>
             </tr>
           </thead>
-          <tbody id="house-most-loyal">
+          <tbody id="most-loyal">
           </tbody>
         </table>
+        <div class="loader"><img src="./imgs/rippleLoader.svg" alt="" srcset=""></div>
       </div>
     </div>
   </div>
@@ -151,9 +142,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-
-  <script src="./js/house113.js"></script>
-  <script src="./js/loyaltyHouse.js"></script>
+  <script src="./js/loyalty.js"></script>
 
 </body>
 

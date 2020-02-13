@@ -83,7 +83,7 @@ form span {
 
 /* ************* TABLE ************* */
 
-#loader {
+.loader {
   text-align: center;
 }
 

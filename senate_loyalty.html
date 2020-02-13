@@ -82,25 +82,14 @@
 					<thead class="thead-light">
 						<tr>
 							<th>Party</th>
-							<th># of Reps</th>
-							<th>% Voted with Party</th>
+							<th>Members</th>
+							<th>Party Votes (%)</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr id="rep-at-glance">
-							<td>Republican</td>
-						</tr>
-						<tr id="dem-at-glance">
-							<td>Democrat</td>
-						</tr>
-						<tr id="ind-at-glance">
-							<td>Independent</td>
-						</tr>
-						<tr id="total-at-glance">
-							<td>Total</td>
-						</tr>
+					<tbody id="dataAtGlance">
 					</tbody>
 				</table>
+				<div class="loader"><img src="./imgs/rippleLoader.svg" alt="" srcset=""></div>
 			</div>
 		</div>
 
@@ -111,14 +100,15 @@
 				<table class="table table-bordered table-hover table-dark table-responsive-sm">
 					<thead class="thead-light">
 						<tr>
-							<th>Name</th>
-							<th># of Party Votes</th>
-							<th>% Party Votes</th>
+							<th>Party</th>
+							<th>Members</th>
+							<th>Party Votes (%)</th>
 						</tr>
 					</thead>
-					<tbody id="senate-least-loyal">
+					<tbody id="least-loyal">
 					</tbody>
 				</table>
+				<div class="loader"><img src="./imgs/rippleLoader.svg" alt="" srcset=""></div>
 			</div>
 			<div class="block-text py-2 col-12 col-md-6">
 				<h4>Most Loyal (Top 10% of Party)</h4>
@@ -126,13 +116,14 @@
 					<thead class="thead-light">
 						<tr>
 							<th>Name</th>
-							<th># of Party Votes</th>
-							<th>% Party Votes</th>
+							<th>Party Votes</th>
+							<th>Party Votes (%)</th>
 						</tr>
 					</thead>
-					<tbody id="senate-most-loyal">
+					<tbody id="most-loyal">
 					</tbody>
 				</table>
+				<div class="loader"><img src="./imgs/rippleLoader.svg" alt="" srcset=""></div>
 			</div>
 		</div>
 	</div>
@@ -152,8 +143,7 @@
 		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 		crossorigin="anonymous"></script>
 
-	<script src="./js/senate113.js"></script>
-	<script src="./js/loyaltySenate.js"></script>
+	<script src="./js/loyalty.js"></script>
 
 </body>
 
