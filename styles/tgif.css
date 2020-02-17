@@ -6,21 +6,22 @@ body {
   background-size: cover;
   color: white;
   padding-top: 100px;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* min-height: 100vh; */
 }
 
 /* ************* NAVBAR ************* */
+.navbar-brand {
+  padding-right: 20px;
+  border-right: 2px solid rgb(232, 193, 64);
+}
+
 #logo {
   width: 100px;
   height: 100%;
 }
 
-.navbar-brand {
-  padding-right: 20px;
-  border-right: 2px solid rgb(232, 193, 64);
-}
 #email > a {
   color: rgb(210, 167, 26);
 }
@@ -49,17 +50,21 @@ body {
   background-color: rgba(0, 0, 0, 0.858);
 }
 
+.first-page-img {
+  max-height: 600px;
+  width: 90%;
+}
+
 #more-text {
   display: none;
 }
 
 #more-btn {
-  color: white;
-  text-decoration: underline;
+  color: rgb(210, 167, 26);
 }
 
 #more-btn:hover {
-  color: rgb(210, 167, 26);
+  color: white;
   text-decoration: underline;
 }
 
@@ -68,6 +73,10 @@ body {
 }
 
 /* ************* FORM & FILTERS ************* */
+
+.custom-switch{
+  padding-left: 1rem;
+}
 
 .filterTitle{
   border-bottom: solid 1px white;
@@ -108,6 +117,26 @@ div > table > thead > tr > th:nth-child(3),
 div > table > thead > tr > th:nth-child(4),
 div > table > thead > tr > th:nth-child(5) {
   text-align: center;
+}
+
+/* ************* TOP BUTTON ************* */
+
+.btn-warning {
+  display: none; /* Hidden by default */
+  position: fixed;
+  bottom: 0px; /* Place the button at the bottom of the page */
+  left: 47%; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  color: black;
+  background-color: rgb(252, 201, 33);
+  font-size: 16px; /* Increase font size */
+  border-radius: 0;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+
+  transition: all 2s linear;
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
 }
 
 /* ************* FOOTER ************* */

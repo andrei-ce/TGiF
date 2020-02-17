@@ -70,21 +70,28 @@
 
   <div class="container main-content py-3 mb-4">
     <!--Table container-->
-    <div class="block-text py-3">
-      <h2>About TGiF</h2>
-      <p>Openness, accountability, and honesty define government transparency. In a free society, transparency is
-        government's obligation to share information with citizens. It is at the heart of how citizens hold their public
-        officials accountable. Here at TGIF we believe that government should be transparent.</p>
-      <p>Governments exist to serve the people. Information on how officials conduct the public business and spend
-        taxpayer money must be readily available and easily understood. This transparency allows good and just
-        governance. Transparency promotes accountability and provides information for citizens about what their
-        Government is doing.</p>
-      <p>We also believe that government should be participatory. Public engagement enhances the Government's
-        effectiveness and improves the quality of its decisions. Knowledge is widely dispersed in society, and public
-        officials benefit from having access to that dispersed knowledge. We invite you to use our site to become
-        actively engaged in American government.</p>
-      <p>TGIF works to disclose information in forms that the public can readily find and use. We solicit public
-        feedback to identify information of greatest use to the public.</p>
+    <div class="row">
+      <div class="block-text py-3 col-12 col-lg-6">
+        <h2>About TGiF</h2>
+        <p>Openness, accountability, and honesty define government transparency. In a free society, transparency is
+          government's obligation to share information with citizens. It is at the heart of how citizens hold their
+          public
+          officials accountable. Here at TGIF we believe that government should be transparent.</p>
+        <p>Governments exist to serve the people. Information on how officials conduct the public business and spend
+          taxpayer money must be readily available and easily understood. This transparency allows good and just
+          governance. Transparency promotes accountability and provides information for citizens about what their
+          Government is doing.</p>
+        <p>We also believe that government should be participatory. Public engagement enhances the Government's
+          effectiveness and improves the quality of its decisions. Knowledge is widely dispersed in society, and public
+          officials benefit from having access to that dispersed knowledge. We invite you to use our site to become
+          actively engaged in American government.</p>
+        <p>TGIF works to disclose information in forms that the public can readily find and use. We solicit public
+          feedback to identify information of greatest use to the public.</p>
+      </div>
+      <div class="d-flex justify-content-center py-3 col-12 col-lg-6">
+        <img class="first-page-img img-fluid" src="https://source.unsplash.com/oN_cUY1v7hs" alt="congress" sizes=""
+          srcset="">
+      </div>
     </div>
     <div class="block-text py-3">
       <h3>Background History of Government Transparency</h3>
@@ -122,20 +129,15 @@
     </div>
     <button onclick="readMoreLess()" class="btn btn-link pl-0" id="more-btn">Read more...</button>
   </div>
+
   <footer>
     <p>&reg; All rights reserved to Transparent Government in Fact</p>
   </footer>
   <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src=" https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS, then Materialize JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <script>
     function readMoreLess() {
       var moreBtn = document.getElementById("more-btn");

@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <!-- Font Awesome CSS -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
     integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />
@@ -67,6 +66,7 @@
       </div>
     </nav>
   </header>
+
   <!--Table container-->
   <div class="container main-content py-3 mb-4">
     <div class="block-text py-3">
@@ -83,25 +83,28 @@
     <p class="filterTitle">Filter by:</p>
     <form>
       <div class="form-row justify-content-between  ml-2 mr-2">
-        <div class="form-row align-items-center d-flex col-12 col-md-3 col-lg-2">
+        <div class="form-row align-items-center d-flex col-12 col-md-3">
           <span>State: </span>
           <select class="form-control-sm form-check-inline" id="stateSelector">
             <option value="">All</option>
           </select>
         </div>
-        <div class="form-row d-flex align-items-center justify-content-md-end col-12 col-md-9 col-lg-10">
+        <div class="form-row d-flex align-items-center justify-content-md-end col-12 col-md-9">
           <span>Party: </span>
-          <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" name="filter" id="democratsFilter" value="D" unchecked>
-            <label class="form-check-label" for="democratsFilter">Democrats</label>
+          <div class="form-check-inline custom-control custom-switch">
+            <input class="form-check-input custom-control-input" type="checkbox" name="filter" id="sw1" value="D"
+              unchecked>
+            <label class="form-check-label custom-control-label" for="sw1">Democrats</label>
           </div>
-          <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" name="filter" id="republicansFilter" value="R" unchecked>
-            <label class="form-check-label" for="republicansFilter">Republicans</label>
+          <div class="form-check-inline custom-control custom-switch">
+            <input class="form-check-input custom-control-input" type="checkbox" name="filter" id="sw2" value="R"
+              unchecked>
+            <label class="form-check-label custom-control-label" for="sw2">Republicans</label>
           </div>
-          <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" name="filter" id="independentFilter" value="I" unchecked>
-            <label class="form-check-label" for="independentFilter">Independent</label>
+          <div class="form-check-inline custom-control custom-switch">
+            <input class="form-check-input custom-control-input" type="checkbox" name="filter" id="sw3" value="I"
+              unchecked>
+            <label class="form-check-label custom-control-label" for="sw3">Independent</label>
           </div>
         </div>
       </div>
@@ -124,23 +127,18 @@
     <div class="loader"><img src="./imgs/rippleLoader.svg" alt="" srcset=""></div>
     <span id="noResults">No matches to your search criteria.</span>
   </div>
+
+  <button id="buttonTop" class="button btn btn-warning fixed-bottom" title="Go to top">Top <i
+      class="fas fa-angle-double-up"></i></button>
+
   <footer>
     <p>&reg; All rights reserved to Transparent Government in Fact</p>
   </footer>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
-  <!-- <script src="./js/house113.js"></script>
-  <script src="./js/mainHouse.js"></script> -->
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <script src="./js/main.js"></script>
 </body>
 

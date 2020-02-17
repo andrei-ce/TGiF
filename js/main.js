@@ -144,3 +144,21 @@ function printSelectOptions() {
     stateSelector.appendChild(op);
   }
 }
+
+// ================================
+// Scroll to top button
+// ================================
+window.onscroll = function () { scrollFunction() };
+
+function scrollFunction() {
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    $('.btn-warning').css("display", "block");
+  } else {
+    $('.btn-warning').css("display", "none");
+  }
+}
+
+$('#buttonTop').click(() => {
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  document.body.scrollTop = 0; // For Safari
+});
