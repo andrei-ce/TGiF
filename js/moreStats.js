@@ -1,4 +1,6 @@
-//GLOBAL VARIABLES
+// ===================================================================
+// GLOBAL VARIABLES
+// ===================================================================
 let republicanMembers = [];
 let democratMembers = [];
 let independentMembers = [];
@@ -8,7 +10,9 @@ let fieldsAttendance = ["first_name", "missed_votes", "missed_votes_pct"];
 let stats = {};
 let loader = document.querySelectorAll('.loader');
 
-//URL WINDOW READER
+// ===================================================================
+// URL WINDOW READER
+// ===================================================================
 let url = window.location.pathname.split("/").pop();
 let chamber;
 if (url === "senate_att.html" || url === "senate_loyalty.html") {
@@ -17,7 +21,9 @@ if (url === "senate_att.html" || url === "senate_loyalty.html") {
   chamber = "https://api.propublica.org/congress/v1/113/house/members.json"
 }
 
-//FETCH DATA ACCORDING TO HTML WINDOW LOCATION
+// ===================================================================
+// FETCH DATA & INITIALIZE ACCORDING TO HTML WINDOW LOCATION
+// ===================================================================
 fetch(chamber, {
   method: "GET",
   headers: {
@@ -31,7 +37,7 @@ fetch(chamber, {
 }).then((data) => {
   originalMembers = data.results[0].members;
   loader.forEach(l => l.style.display = 'none')
-  init(originalMembers);
+  init(originalMembers);                              //initialization
 }).catch(function (error) {
   console.log("Request failed: " + error.message);
 });
@@ -53,15 +59,9 @@ function init(members) {
   }
 }
 
-function setStats() {
-  stats.republicanTotal = republicanMembers.length;
-  stats.democratTotal = democratMembers.length;
-  stats.independentTotal = independentMembers.length;
-  stats.republicanAvgVotesWithParty = averageVotesWithParty(republicanMembers).toFixed(2);
-  stats.democratAvgVotesWithParty = averageVotesWithParty(democratMembers).toFixed(2);
-  stats.independentAvgVotesWithParty = averageVotesWithParty(independentMembers).toFixed(2);
-}
-
+// ===================================================================
+// STATISTIC OBJECT FUNCTIONS & PRINT DATA AT GLANCE
+// ===================================================================
 function generatePartyLists(memberList) {
   for (let i = 0; i < memberList.length; i++) {
     //if party === republican, push to republicanMembers array list
@@ -73,6 +73,15 @@ function generatePartyLists(memberList) {
       independentMembers.push(memberList[i]);
     }
   }
+}
+
+function setStats() {
+  stats.republicanTotal = republicanMembers.length;
+  stats.democratTotal = democratMembers.length;
+  stats.independentTotal = independentMembers.length;
+  stats.republicanAvgVotesWithParty = averageVotesWithParty(republicanMembers).toFixed(2);
+  stats.democratAvgVotesWithParty = averageVotesWithParty(democratMembers).toFixed(2);
+  stats.independentAvgVotesWithParty = averageVotesWithParty(independentMembers).toFixed(2);
 }
 
 function averageVotesWithParty(arr) {
@@ -151,6 +160,9 @@ function printDataAtGlance(members) {
   dataAtGlance.appendChild(newTr);
 }
 
+// ===================================================================
+// SORT VARIABLE, SORT ORDER, SELECT MOST&LEAST, ADD VOTES_W_PARTY_ABS
+// ===================================================================
 function sortMembers(list, order, stat) {
   if (order === "ascending") {
     memberListSorted = list.sort((a, b) => {
@@ -177,7 +189,6 @@ function generateLeast(memberList, order, stat, fields) {
   orderedMembers.forEach(m => {
     m.votes_with_party_abs = Math.round((m.total_votes - m.missed_votes) * (m.votes_with_party_pct / 100))
   });
-  console.log(orderedMembers);
   print(orderedMembers, "least", fields);
 }
 
@@ -194,10 +205,12 @@ function generateMost(memberList, order, stat, fields) {
   mostMembers.forEach(m => {
     m.votes_with_party_abs = Math.round((m.total_votes - m.missed_votes) * (m.votes_with_party_pct / 100))
   });
-  console.log(mostMembers);
   print(mostMembers, "most", fields);
 }
 
+// ===================================================================
+// PRINT OUTPUTS FROM MOST-LEAST-ARRAYS ON MOST-LEAST-TABLES
+// ===================================================================
 function print(memberList, where, fields) {
   let table = document.getElementById(where);
   for (let i = 0; i < memberList.length; i++) {

@@ -1,4 +1,6 @@
+// ===============================================
 // GLOBAL VARIABLES
+// ===============================================
 let partySelector = document.querySelectorAll('input[type=checkbox]');
 let stateSelector = document.querySelector('#stateSelector');
 let newBody = document.querySelector('#membersShowing');
@@ -7,7 +9,9 @@ let loader = document.querySelectorAll('.loader');
 let stateList = []; //if generateStateList() and printSelectOptions are joined, no global variable is needed
 let fieldsInserted = ['first_name', 'party', 'state', 'seniority', 'votes_with_party_pct'];
 
-//URL WINDOW READER
+// ===============================================
+// URL WINDOW READER
+// ===============================================
 let url = window.location.pathname.split("/").pop();
 let chamber;
 if (url === "senate.html") {
@@ -16,7 +20,9 @@ if (url === "senate.html") {
   chamber = "https://api.propublica.org/congress/v1/113/house/members.json"
 }
 
-//FETCH DATA ACCORDING TO HTML WINDOW LOCATION
+// ===============================================
+// FETCH DATA ACCORDING TO HTML WINDOW LOCATION
+// ===============================================
 fetch(chamber, {
   method: "GET",
   headers: {
@@ -30,7 +36,7 @@ fetch(chamber, {
 }).then((data) => {
   originalMembers = data.results[0].members;
   loader.forEach(l => l.style.display = 'none')
-  init(originalMembers);
+  init(originalMembers);                              //initialization
 }).catch(function (error) {
   console.log("Request failed: " + error.message);
 });
@@ -43,11 +49,14 @@ function init(members) {
   setupStateListener();
 }
 
-//LISTEN TO DROPDOWN SELECTOR FORM
+// ===============================================
+// FILTER LISTENERS & FUNCTIONS
+// ===============================================
+// CHECKBOXES (PARTY FILTER)
 function setupStateListener() {
   stateSelector.addEventListener("input", function () { filterParty(originalMembers) });
 }
-//LISTEN TO CHECKBOX FORMS
+// DROPDOWN MENU (STATE FILTER)
 function setupPartyListener() {
   partySelector.forEach(box => box.addEventListener("click", function () { filterParty(originalMembers) }));
 }
@@ -84,6 +93,9 @@ function filterState(members) {
   }
 }
 
+// ===============================================
+// PRINT TABLE WITH ARRAY PRIVIDED
+// ===============================================
 function printTable(members) {
   newBody.innerHTML = ""; //delete old table
   //creates and fills rows and cells for every member found
@@ -120,6 +132,9 @@ function printTable(members) {
   newBody.rows.length < 1 ? noResults.style.display = 'block' : noResults.style.display = 'none';
 }
 
+// ===============================================
+// SELECT AND PRINT DROPDOWN STATE VALUES
+// ===============================================
 function generateStateList(members) {
   //delete previous list
   stateList = []; //global variable
@@ -146,7 +161,7 @@ function printSelectOptions() {
 }
 
 // ================================
-// Scroll to top button
+// SCROLL TO TOP BUTTON
 // ================================
 window.onscroll = function () { scrollFunction() };
 
