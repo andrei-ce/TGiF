@@ -54,7 +54,7 @@ function init(members) {
     generatePartyLists(members);
     setStats();
     printDataAtGlance(members);
-    generateLeast(members, "ascending", "votes_with_party_pct", fieldsLoyalty);
+    generateLeast(members, "ascending", "votes_with_party_pct", fieldsLoyalty); //list, order, stat, fields
     generateMost(members, "ascending", "votes_with_party_pct", fieldsLoyalty);
   }
 }

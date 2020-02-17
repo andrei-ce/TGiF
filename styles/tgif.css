@@ -6,9 +6,9 @@ body {
   background-size: cover;
   color: white;
   padding-top: 100px;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* min-height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* ************* NAVBAR ************* */
@@ -127,9 +127,12 @@ div > table > thead > tr > th:nth-child(5) {
   bottom: 0px; /* Place the button at the bottom of the page */
   left: 47%; /* Place the button 30px from the right */
   z-index: 99; /* Make sure it does not overlap */
+  height: 30px;
+  padding: 1px 10px;
   color: black;
-  background-color: rgb(252, 201, 33);
+  background-color: rgba(252, 201, 33, 0.432);
   font-size: 16px; /* Increase font size */
+  border:0;
   border-radius: 0;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
