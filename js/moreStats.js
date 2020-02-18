@@ -27,6 +27,8 @@ if (url === "senate_att.html" || url === "senate_loyalty.html") {
 // ==========================================================================
 // FETCH DATA & INITIALIZE ACCORDING TO HTML WINDOW LOCATION & LOCAL STORAGE
 // ==========================================================================
+checkLocalStorage();
+
 if (!localStorage[localName]) {
   fetch(chamber, {
     method: "GET",
@@ -65,6 +67,15 @@ function init(members) {
     printDataAtGlance(members);
     generateLeastAndMost(members, "least", "ascending", "votes_with_party_pct", fieldsLoyalty); //list, group, order, stat, fields
     generateLeastAndMost(members, "most", "descending", "votes_with_party_pct", fieldsLoyalty);
+  }
+}
+function checkLocalStorage() {
+  var lastClear = localStorage.getItem('lastclear'),
+    timeNow = (new Date()).getTime();
+  // .getTime() returns milliseconds so 1000 * 60 * 60 * 24 = 24 days
+  if ((timeNow - lastClear) > 1000 * 60 * 60 * 24) {
+    localStorage.clear();
+    localStorage.setItem('lastClear', timeNow);
   }
 }
 
