@@ -5,7 +5,7 @@ let partySelector = document.querySelectorAll('input[type=checkbox]');
 let stateSelector = document.querySelector('#stateSelector');
 let newBody = document.querySelector('#membersShowing');
 let noResults = document.querySelector('#noResults');
-let loader = document.querySelectorAll('.loader');
+let loader = document.querySelector('.loader');
 let stateList = []; //if generateStateList() and printSelectOptions are joined, no global variable is needed
 let fieldsInserted = ['first_name', 'party', 'state', 'seniority', 'votes_with_party_pct'];
 
@@ -35,7 +35,7 @@ fetch(chamber, {
   throw new Error(res.statusText) //will throw error only if an error exists (else, res.statusText = OK)
 }).then((data) => {
   originalMembers = data.results[0].members;
-  loader.forEach(l => l.style.display = 'none')
+  loader.style.display = 'none';
   init(originalMembers);                              //initialization
 }).catch(function (error) {
   console.log("Request failed: " + error.message);
@@ -159,21 +159,3 @@ function printSelectOptions() {
     stateSelector.appendChild(op);
   }
 }
-
-// ================================
-// SCROLL TO TOP BUTTON
-// ================================
-window.onscroll = function () { scrollFunction() };
-
-function scrollFunction() {
-  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-    $('.btn-warning').css("display", "block");
-  } else {
-    $('.btn-warning').css("display", "none");
-  }
-}
-
-$('#buttonTop').click(() => {
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-  document.body.scrollTop = 0; // For Safari
-});

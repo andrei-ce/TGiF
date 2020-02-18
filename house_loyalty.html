@@ -16,6 +16,7 @@
   <link href="https://fonts.googleapis.com/css?family=Fauna+One&display=swap" rel="stylesheet" />
   <!-- Custom CSS -->
   <link rel="stylesheet" href="./styles/tgif.css" />
+  <script src="./js/sorttable.js"></script>
   <title>TGiF: Loyalty</title>
 </head>
 
@@ -79,7 +80,7 @@
       </div>
       <div class="block-text py-2 col-12 col-md-6">
         <h4 class="text-right">House at a glance</h4>
-        <table class="table table-bordered table-hover table-dark table-responsive-sm">
+        <table class="atGlance table table-bordered table-hover table-dark">
           <thead class="thead-light">
             <tr>
               <th>Party</th>
@@ -98,12 +99,12 @@
     <div class="row">
       <div class="block-text py-2 col-12 col-md-6">
         <h4>Least Loyal (Bottom 10% of Party)</h4>
-        <table class="table table-bordered table-hover table-dark table-responsive-sm">
+        <table class="sortable fixedColumns table table-bordered table-hover table-dark">
           <thead class="thead-light">
             <tr>
               <th>Name</th>
-              <th>Party Votes</th>
-              <th>Party Votes (%)</th>
+              <th class="sorttable_numeric">Party Votes</th>
+              <th class="sorttable_numeric">Party Votes (%)</th>
             </tr>
           </thead>
           <tbody id="least">
@@ -113,12 +114,12 @@
       </div>
       <div class="block-text py-2 col-12 col-md-6">
         <h4>Most Loyal (Top 10% of Party)</h4>
-        <table class="table table-bordered table-hover table-dark table-responsive-sm">
+        <table class="sortable fixedColumns table table-bordered table-hover table-dark">
           <thead class="thead-light">
             <tr>
               <th>Name</th>
-              <th>Party Votes</th>
-              <th>Party Votes (%)</th>
+              <th class="sorttable_numeric">Party Votes</th>
+              <th class="sorttable_numeric">Party Votes (%)</th>
             </tr>
           </thead>
           <tbody id="most">
@@ -128,7 +129,8 @@
       </div>
     </div>
   </div>
-
+  <button id="buttonTop" class="button btn btn-warning" title="Go to top">Top <i
+      class="fas fa-angle-double-up"></i></button>
   <footer>
     <p>&reg; All rights reserved to Transparent Government in Fact</p>
   </footer>
@@ -143,6 +145,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
+  <script src="./js/animations.js"></script>
   <script src="./js/moreStats.js"></script>
 
 </body>

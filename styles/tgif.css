@@ -1,3 +1,7 @@
+/* html {
+  scroll-behavior: smooth;
+} */
+
 body {
   font-family: "Fauna One", serif;
   background-image: url(../imgs/pattern1.jpeg);
@@ -50,9 +54,14 @@ body {
   background-color: rgba(0, 0, 0, 0.858);
 }
 
+img-container {
+  align-items: center;
+  justify-content: center;
+}
+
 .first-page-img {
-  max-height: 600px;
-  width: 90%;
+  height: 600px;
+  width: 450px;
 }
 
 #more-text {
@@ -66,10 +75,6 @@ body {
 #more-btn:hover {
   color: white;
   text-decoration: underline;
-}
-
-#noResults {
-  display: none;
 }
 
 /* ************* FORM & FILTERS ************* */
@@ -91,11 +96,42 @@ form span {
 }
 
 /* ************* TABLE ************* */
-
-.loader {
-  text-align: center;
+body > div > table.fixedColumns,
+body > div > table.fixedColumns5 {
+  table-layout: fixed;
+  width: 100%;
 }
 
+
+/* ********* engaged/loyal tables column width ******** */
+table.fixedColumns.table.table-bordered.table-hover.table-dark > thead > tr > th:nth-of-type(1) {
+  width: 40%;
+}
+table.fixedColumns.table.table-bordered.table-hover.table-dark > thead > tr > th:nth-of-type(2) {
+  width: 30%;
+}
+table.fixedColumns.table.table-bordered.table-hover.table-dark > thead > tr > th:nth-of-type(3) {
+  width: 30%;
+}
+
+/* ********* house/senate tables column width ******** */
+table.fixedColumns5.table.table-bordered.table-hover.table-dark > thead > tr > th:nth-of-type(1) {
+  width: 30%;
+}
+table.fixedColumns5.table.table-bordered.table-hover.table-dark > thead > tr > th:nth-of-type(2) {
+  width: 10%;
+}
+table.fixedColumns5.table.table-bordered.table-hover.table-dark > thead > tr > th:nth-of-type(3) {
+  width: 10%;
+}
+table.fixedColumns5.table.table-bordered.table-hover.table-dark > thead > tr > th:nth-of-type(4) {
+  width: 20%;
+}
+table.fixedColumns5.table.table-bordered.table-hover.table-dark > thead > tr > th:nth-of-type(5) {
+  width: 20%;
+}
+
+/* ********* other table properties ******** */
 tbody a {
   color: white;
 }
@@ -119,27 +155,37 @@ div > table > thead > tr > th:nth-child(5) {
   text-align: center;
 }
 
+.loader {
+  text-align: center;
+}
+
+#noResults {
+  display: none;
+  background-color: rgb(253, 194, 194);
+  color: rgb(109, 0, 0);
+  text-align: center;
+}
+
 /* ************* TOP BUTTON ************* */
 
 .btn-warning {
-  display: none; /* Hidden by default */
   position: fixed;
   bottom: 0px; /* Place the button at the bottom of the page */
-  left: 47%; /* Place the button 30px from the right */
-  z-index: 99; /* Make sure it does not overlap */
-  height: 30px;
+  right: 12px; /* Place the button 30px from the right */
+  z-index: 1; /* Make sure it does not overlap */
+  height: 0px; /* Hidden by default */
   padding: 1px 10px;
   color: black;
-  background-color: rgba(252, 201, 33, 0.432);
+  background-color: rgb(252, 201, 33);
   font-size: 16px; /* Increase font size */
   border:0;
   border-radius: 0;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 
-  transition: all 2s linear;
-  -webkit-transition: 1s;
-  -moz-transition: 1s;
+  transition: height 0.5s linear;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s; 
 }
 
 /* ************* FOOTER ************* */

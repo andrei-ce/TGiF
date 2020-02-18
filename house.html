@@ -15,6 +15,7 @@
   <link href="https://fonts.googleapis.com/css?family=Fauna+One&display=swap" rel="stylesheet" />
   <!-- Custom CSS -->
   <link rel="stylesheet" href="./styles/tgif.css" />
+  <script src="./js/sorttable.js"></script>
   <title>TGiF: House</title>
 </head>
 
@@ -112,14 +113,14 @@
     </form>
 
 
-    <table class="table table-bordered table-hover table-dark table-responsive-sm">
+    <table class="fixedColumns5 sortable table table-bordered table-hover table-dark">
       <thead class="thead-light">
         <tr>
           <th scope="col">Name</th>
           <th scope="col">Party</th>
           <th scope="col">State</th>
-          <th scope="col">Years in Office</th>
-          <th scope="col">% Votes w/ Party</th>
+          <th class="sorttable_numeric" scope="col">Years in Office</th>
+          <th class="sorttable_numeric" scope="col">% Votes w/ Party</th>
         </tr>
       </thead>
       <tbody id="membersShowing">
@@ -129,7 +130,7 @@
     <span id="noResults">No matches to your search criteria.</span>
   </div>
 
-  <button id="buttonTop" class="button btn btn-warning fixed-bottom" title="Go to top">Top <i
+  <button id="buttonTop" class="button btn btn-warning" title="Go to top">Top <i
       class="fas fa-angle-double-up"></i></button>
 
   <footer>
@@ -140,6 +141,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="./js/animations.js"></script>
   <script src="./js/main.js"></script>
 </body>
 

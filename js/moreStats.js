@@ -36,7 +36,7 @@ fetch(chamber, {
   throw new Error(res.statusText) //will throw error only if an error exists (else, res.statusText = OK)
 }).then((data) => {
   originalMembers = data.results[0].members;
-  loader.forEach(l => l.style.display = 'none')
+  loader.forEach(l => l.style.display = 'none');
   init(originalMembers);                              //initialization
 }).catch(function (error) {
   console.log("Request failed: " + error.message);
@@ -222,6 +222,7 @@ function print(memberList, where, fields) {
       if (j == 0) {
         let newAnchorTag = document.createElement("a");
         newAnchorTag.setAttribute("href", memberList[i].url);
+        newAnchorTag.setAttribute("target", "_blank");
         newAnchorTag.innerHTML = memberList[i][dataInserted];
         if (j == 0 && memberList[i].middle_name != null) {
           newAnchorTag.innerHTML = `${newAnchorTag.innerHTML} ${memberList[i].middle_name} ${memberList[i].last_name}`;
