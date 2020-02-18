@@ -14,32 +14,41 @@ let fieldsInserted = ['first_name', 'party', 'state', 'seniority', 'votes_with_p
 // ===============================================
 let url = window.location.pathname.split("/").pop();
 let chamber;
+let localName;
 if (url === "senate.html") {
   chamber = "https://api.propublica.org/congress/v1/113/senate/members.json";
+  localName = "dataSenate";
 } else if (url === "house.html") {
   chamber = "https://api.propublica.org/congress/v1/113/house/members.json"
-}
+  localName = "dataHouse";
+};
 
-// ===============================================
-// FETCH DATA ACCORDING TO HTML WINDOW LOCATION
-// ===============================================
-fetch(chamber, {
-  method: "GET",
-  headers: {
-    'X-API-KEY': "lbIexHSOJM4TcjsZnHyF1WYVzjkAaZsYzncPFRJn"
-  }
-}).then((res) => {
-  if (res.ok) { //if response.ok exists, transform response into a json object
-    return res.json();
-  }
-  throw new Error(res.statusText) //will throw error only if an error exists (else, res.statusText = OK)
-}).then((data) => {
-  originalMembers = data.results[0].members;
+// ==========================================================================
+// FETCH DATA & INITIALIZE ACCORDING TO HTML WINDOW LOCATION & LOCAL STORAGE
+// ==========================================================================
+if (!localStorage[localName]) {
+  fetch(chamber, {
+    method: "GET",
+    headers: {
+      'X-API-KEY': "lbIexHSOJM4TcjsZnHyF1WYVzjkAaZsYzncPFRJn"
+    }
+  }).then((res) => {
+    if (res.ok) { //if response.ok exists, transform response into a json object
+      return res.json();
+    }
+    throw new Error(res.statusText) //will throw error only if an error exists (else, res.statusText = OK)
+  }).then((data) => {
+    localStorage.setItem(localName, JSON.stringify(data.results[0].members));
+    var originalMembers = JSON.parse(localStorage.getItem(localName));
+    init(originalMembers);                                       //initialization
+    loader.style.display = 'none';
+  }).catch(function (error) {
+    console.log("Request failed: " + error.message);
+  });
+} else {
+  init(JSON.parse(localStorage.getItem(localName)));             //else, initialization
   loader.style.display = 'none';
-  init(originalMembers);                              //initialization
-}).catch(function (error) {
-  console.log("Request failed: " + error.message);
-});
+};
 
 function init(members) {
   printTable(members);

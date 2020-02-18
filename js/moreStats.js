@@ -15,32 +15,41 @@ let loader = document.querySelectorAll('.loader');
 // ===================================================================
 let url = window.location.pathname.split("/").pop();
 let chamber;
+let localName;
 if (url === "senate_att.html" || url === "senate_loyalty.html") {
   chamber = "https://api.propublica.org/congress/v1/113/senate/members.json";
+  localName = "dataSenate";
 } else if (url === "house_att.html" || url === "house_loyalty.html") {
-  chamber = "https://api.propublica.org/congress/v1/113/house/members.json"
+  chamber = "https://api.propublica.org/congress/v1/113/house/members.json";
+  localName = "dataHouse";
 }
 
-// ===================================================================
-// FETCH DATA & INITIALIZE ACCORDING TO HTML WINDOW LOCATION
-// ===================================================================
-fetch(chamber, {
-  method: "GET",
-  headers: {
-    'X-API-KEY': "lbIexHSOJM4TcjsZnHyF1WYVzjkAaZsYzncPFRJn"
-  }
-}).then((res) => {
-  if (res.ok) { //if response.ok exists, transform response into a json object
-    return res.json();
-  }
-  throw new Error(res.statusText) //will throw error only if an error exists (else, res.statusText = OK)
-}).then((data) => {
-  originalMembers = data.results[0].members;
+// ==========================================================================
+// FETCH DATA & INITIALIZE ACCORDING TO HTML WINDOW LOCATION & LOCAL STORAGE
+// ==========================================================================
+if (!localStorage[localName]) {
+  fetch(chamber, {
+    method: "GET",
+    headers: {
+      'X-API-KEY': "lbIexHSOJM4TcjsZnHyF1WYVzjkAaZsYzncPFRJn"
+    }
+  }).then((res) => {
+    if (res.ok) { //if response.ok exists, transform response into a json object
+      return res.json();
+    }
+    throw new Error(res.statusText) //will throw error only if an error exists (else, res.statusText = OK)
+  }).then((data) => {
+    localStorage.setItem(localName, JSON.stringify(data.results[0].members));
+    var originalMembers = JSON.parse(localStorage.getItem(localName));
+    loader.forEach(l => l.style.display = 'none');
+    init(originalMembers);                                        //initialization
+  }).catch(function (error) {
+    console.log("Request failed: " + error.message);
+  });
+} else {
+  init(JSON.parse(localStorage.getItem(localName)));             //else, initialization
   loader.forEach(l => l.style.display = 'none');
-  init(originalMembers);                              //initialization
-}).catch(function (error) {
-  console.log("Request failed: " + error.message);
-});
+}
 
 //INITIALIZATION DEPENDS ON ATTENDANCE/LOYALTY
 function init(members) {
@@ -48,14 +57,14 @@ function init(members) {
     generatePartyLists(members);
     setStats();
     printDataAtGlance(members);
-    generateLeast(members, "descending", "missed_votes_pct", fieldsAttendance); //list, order, stat, fields
-    generateMost(members, "descending", "missed_votes_pct", fieldsAttendance);
+    generateLeastAndMost(members, "least", "descending", "missed_votes_pct", fieldsAttendance); //list, group, order, stat, fields
+    generateLeastAndMost(members, "most", "ascending", "missed_votes_pct", fieldsAttendance);
   } else if (url.split("_").pop() === "loyalty.html") {
     generatePartyLists(members);
     setStats();
     printDataAtGlance(members);
-    generateLeast(members, "ascending", "votes_with_party_pct", fieldsLoyalty); //list, order, stat, fields
-    generateMost(members, "ascending", "votes_with_party_pct", fieldsLoyalty);
+    generateLeastAndMost(members, "least", "ascending", "votes_with_party_pct", fieldsLoyalty); //list, group, order, stat, fields
+    generateLeastAndMost(members, "most", "descending", "votes_with_party_pct", fieldsLoyalty);
   }
 }
 
@@ -132,7 +141,6 @@ function printDataAtGlance(members) {
   if (!independentMembers.length) {
     newTd2.textContent = "--";
   } else { newTd2.textContent = stats.independentTotal };
-  newTd2.innerHTML = '--';
   var newTd3 = document.createElement("td");
   newTd3.className = "text-center";
   if (!independentMembers.length) {
@@ -176,36 +184,20 @@ function sortMembers(list, order, stat) {
   };
 }
 
-function generateLeast(memberList, order, stat, fields) {
+function generateLeastAndMost(memberList, group, order, stat, fields) {
   sortMembers(memberList, order, stat)
   let orderedMembers = [];
-  let votesLeast = [];
+  let repreatCheck = [];
   for (let i = 0; i < memberList.length; i++) {
-    if (orderedMembers.length < Math.round(memberList.length * 0.1) || votesLeast.includes(memberListSorted[i][stat])) {
+    if (orderedMembers.length < Math.round(memberList.length * 0.1) || repreatCheck.includes(memberListSorted[i][stat])) {
       orderedMembers.push(memberListSorted[i]);
-      votesLeast.push(memberListSorted[i][stat]);
+      repreatCheck.push(memberListSorted[i][stat]);
     }
   }
   orderedMembers.forEach(m => {
     m.votes_with_party_abs = Math.round((m.total_votes - m.missed_votes) * (m.votes_with_party_pct / 100))
   });
-  print(orderedMembers, "least", fields);
-}
-
-function generateMost(memberList, order, stat, fields) {
-  sortMembers(memberList, order, stat)
-  let mostMembers = [];
-  let votesMost = [];
-  for (let i = memberList.length - 1; i >= 0; i--) {
-    if (mostMembers.length < Math.round(memberList.length * 0.1) || votesMost.includes(memberListSorted[i][stat])) {
-      mostMembers.push(memberListSorted[i]);
-      votesMost.push(memberListSorted[i][stat]);
-    }
-  }
-  mostMembers.forEach(m => {
-    m.votes_with_party_abs = Math.round((m.total_votes - m.missed_votes) * (m.votes_with_party_pct / 100))
-  });
-  print(mostMembers, "most", fields);
+  print(orderedMembers, group, fields);
 }
 
 // ===================================================================
