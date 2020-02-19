@@ -73,7 +73,7 @@ function checkLocalStorage() {
   var lastClear = localStorage.getItem('lastclear');
   var timeNow = (new Date()).getTime();
   // .getTime() returns milliseconds so 1000 * 60 * 60 * 24 = 24 days
-  if ((timeNow - lastClear) > 1000 * 60 * 60 * 24) {
+  if ((timeNow - lastClear) > 1000 * 60 * 60 * 30) {
     localStorage.clear();
     localStorage.setItem('lastClear', timeNow);
   }
