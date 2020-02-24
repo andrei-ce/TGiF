@@ -22,14 +22,16 @@ if (url === "senate_att.html" || url === "senate_loyalty.html") {
 } else if (url === "house_att.html" || url === "house_loyalty.html") {
   chamber = "https://api.propublica.org/congress/v1/113/house/members.json";
   localName = "dataHouse";
-}
+};
+let lastFetch = JSON.parse(localStorage.getItem("lastFetch_" + localName));
 
 // ==========================================================================
 // FETCH DATA & INITIALIZE ACCORDING TO HTML WINDOW LOCATION & LOCAL STORAGE
 // ==========================================================================
+let fetchOrNot = true;
 checkLocalStorage();
 
-if (!localStorage[localName]) {
+if (fetchOrNot) {
   fetch(chamber, {
     method: "GET",
     headers: {
@@ -49,7 +51,8 @@ if (!localStorage[localName]) {
     console.log("Request failed: " + error.message);
   });
 } else {
-  init(JSON.parse(localStorage.getItem(localName)));             //else, initialization
+  originalMembers = JSON.parse(localStorage.getItem(localName))
+  init(originalMembers);                                        //else, initialization
   loader.forEach(l => l.style.display = 'none');
 }
 
@@ -70,14 +73,15 @@ function init(members) {
   }
 }
 function checkLocalStorage() {
-  var lastClear = localStorage.getItem('lastclear');
   var timeNow = (new Date()).getTime();
-  // .getTime() returns milliseconds so 1000 * 60 * 60 * 24 = 24 days
-  if ((timeNow - lastClear) > 1000 * 60 * 60 * 30) {
-    localStorage.clear();
-    localStorage.setItem('lastClear', timeNow);
+  // .getTime() returns milliseconds so 1000 * 60 * 60 * 3 = 3 days
+  if (!localStorage[localName]
+       || ((timeNow - lastFetch) > 1000 * 60 * 60 * 3)) {
+    fetchOrNot = true;
+  } else {
+    fetchOrNot = false;
   }
-}
+};
 
 // ===================================================================
 // STATISTIC OBJECT FUNCTIONS & PRINT DATA AT GLANCE
