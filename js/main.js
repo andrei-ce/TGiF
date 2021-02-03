@@ -93,6 +93,9 @@ function filterParty(members) {
   var partyValues = [...(document.querySelectorAll('input[name=filter]:checked'))].map(x => x.value);
   membersFilteredByParty = []; //temporary array of members
   //for every letter ["D","I","R"], filter member by party
+  
+  // cambiar esta mierda por un .filter(x2):
+  
   for (i = 0; i < members.length; i++) {
     if (partyValues.length < 1 || partyValues.includes(members[i].party)) {
       membersFilteredByParty.push(members[i]);
@@ -171,6 +174,8 @@ function generateStateList(members) {
     }
   }
   stateList.sort();
+
+  // stateList = members
 }
 
 function printSelectOptions() {

@@ -10,6 +10,7 @@ body {
   background-size: cover;
   color: white;
   padding-top: 100px;
+  /* Below only to fix footer at the end of the screen */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
